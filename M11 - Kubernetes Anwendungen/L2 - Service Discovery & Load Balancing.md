@@ -22,6 +22,11 @@ spec:
       targetPort: 9376
 ```
 
+# Service Isolieren:
+```
+https://github.com/ahmetb/kubernetes-network-policy-recipes
+```
+
 ## In diesem Beispiel wird ein Kubernetes-Service mit dem Namen my-service definiert. Durch Angabe des Labels app: MyApp im Selector wird der Service automatisch mit Pods verknüpft, die dieses Label haben. Andere Anwendungen im Cluster können nun auf my-service über den DNS-Namen my-service.default.svc.cluster.local zugreifen.
 
 2. Load Balancing
