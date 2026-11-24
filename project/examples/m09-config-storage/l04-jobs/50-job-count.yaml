@@ -1,0 +1,25 @@
+# Job (Lab 9.4): zählt einmal die Zeilen in access.log auf dem PVC hello-data und endet
+# Erneut ausführen: kubectl delete job hello-count, dann wieder anwenden
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: hello-count
+  labels:
+    app: hello-frontend
+spec:
+  backoffLimit: 2                   # bei Fehler höchstens 2 weitere Versuche
+  template:                         # Pod-Bauplan wie beim Deployment
+    spec:
+      restartPolicy: Never          # Job-Pods enden; Always ist hier verboten
+      containers:
+        - name: count
+          image: busybox:1.37
+          command: ["wc", "-l", "/data/access.log"]
+          volumeMounts:
+            - name: data
+              mountPath: /data
+              readOnly: true        # der Job liest nur
+      volumes:
+        - name: data
+          persistentVolumeClaim:
+            claimName: hello-data   # derselbe Claim wie das Frontend (Lab 9.3)

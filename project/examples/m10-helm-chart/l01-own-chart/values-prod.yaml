@@ -1,0 +1,7 @@
+# Werte für eine Produktions-Umgebung; alles andere kommt aus hello/values.yaml.
+#   helm install hello hello -n hello-prod --create-namespace -f values-prod.yaml
+replicas: 3
+color: lightblue
+nodePort: 30082
+backend:
+  replicas: 3

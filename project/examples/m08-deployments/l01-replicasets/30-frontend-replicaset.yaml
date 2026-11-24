@@ -1,0 +1,30 @@
+# Lab 8.1: ReplicaSet "hello-frontend" ersetzt den Einzel-Pod "frontend" aus Lab 7.1
+apiVersion: apps/v1                    # ReplicaSets gehören zur API-Gruppe "apps"
+kind: ReplicaSet
+metadata:
+  name: hello-frontend
+  labels:
+    app: hello-frontend
+    tier: frontend
+spec:
+  replicas: 3                          # Soll: drei laufende Pods
+  selector:                            # welche Pods zählt das ReplicaSet?
+    matchLabels:                       # alle mit genau diesen Labels (ohne version)
+      app: hello-frontend
+      tier: frontend
+  template:                            # Bauplan für jeden neuen Pod
+    metadata:
+      labels:                          # müssen zum Selector passen
+        app: hello-frontend
+        tier: frontend
+        version: v1
+    spec:                              # wie spec im Pod-Manifest aus Lab 7.1
+      containers:
+        - name: frontend
+          image: hello-frontend:v1
+          imagePullPolicy: Never
+          ports:
+            - containerPort: 80
+          env:
+            - name: BACKEND_URL
+              value: "http://backend"  # Service "backend" aus Lab 7.2

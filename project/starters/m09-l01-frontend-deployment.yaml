@@ -1,0 +1,58 @@
+# Lab 9.1 – Starter: Frontend-Deployment mit envFrom
+# Ersetzt die Datei des Frontend-Deployments: kopieren nach playground/k8s/30-frontend-deployment.yaml,
+# TODO ergänzen, dann:
+#   kubectl apply -f playground/k8s/30-frontend-deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hello-frontend
+  labels:
+    app: hello-frontend
+    tier: frontend
+  annotations:
+    kubernetes.io/change-cause: "Konfiguration aus ConfigMap hello-config"
+spec:
+  replicas: 3
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 0
+  selector:
+    matchLabels:                       # app + tier, nie version
+      app: hello-frontend
+      tier: frontend
+  template:
+    metadata:
+      labels:
+        app: hello-frontend
+        tier: frontend
+        version: v2
+    spec:
+      containers:
+        - name: frontend
+          image: hello-frontend:v2
+          imagePullPolicy: Never
+          ports:
+            - containerPort: 80
+          # TODO: Der env-Block mit BACKEND_URL ist entfernt.
+          #       Ergänze hier envFrom mit einem configMapRef auf die ConfigMap hello-config.
+          readinessProbe:                  # Lab 8.4
+            httpGet:
+              path: /healthz
+              port: 80
+            periodSeconds: 5
+            failureThreshold: 2
+          livenessProbe:
+            httpGet:
+              path: /healthz
+              port: 80
+            periodSeconds: 10
+            failureThreshold: 3
+          resources:                       # Lab 8.5
+            requests:
+              cpu: 100m
+              memory: 64Mi
+            limits:
+              cpu: 500m
+              memory: 128Mi

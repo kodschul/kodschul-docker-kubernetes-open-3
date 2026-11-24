@@ -1,0 +1,41 @@
+# Lab 4.3 – Starter: Ressourcengrenzen
+# Kopieren nach playground/compose.yml, dann die "# TODO:"-Zeilen ersetzen.
+# Stand aus Lab 4.2 (Netzwerke frontend-net und backend-net, Backend ohne Port).
+name: hello
+
+services:
+  backend:
+    image: hello-backend:v1
+    networks:
+      - backend-net
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "http://127.0.0.1/healthz"]
+      interval: 5s
+      timeout: 2s
+      retries: 3
+      start_period: 5s
+    # TODO: Grenzen setzen: deploy > resources > limits mit memory: 128M und cpus: "0.5"
+
+  frontend:
+    image: hello-frontend:v1
+    ports:
+      - "${FRONTEND_PORT:-8080}:80"
+    networks:
+      - frontend-net
+      - backend-net
+    environment:
+      BACKEND_URL: http://backend
+      APP_COLOR: ${APP_COLOR:-lightblue}
+    depends_on:
+      backend:
+        condition: service_healthy
+    volumes:
+      - hello-data:/data
+    # TODO: dieselben Grenzen wie beim Backend
+
+networks:
+  frontend-net:
+  backend-net:
+
+volumes:
+  hello-data:

@@ -1,0 +1,35 @@
+# Starter Lab 8.2: Frontend-Deployment (Inhalt wie das ReplicaSet aus Lab 8.1)
+# Kopieren nach playground/k8s/30-frontend-deployment.yaml, TODOs ergänzen, dann:
+#   kubectl apply -f playground/k8s/
+apiVersion: apps/v1
+# TODO: Objektart von ReplicaSet auf Deployment ändern
+kind: ReplicaSet
+metadata:
+  name: hello-frontend
+  labels:
+    app: hello-frontend
+    tier: frontend
+  # TODO: Annotation kubernetes.io/change-cause mit dem Wert "Start mit v1" ergänzen
+spec:
+  replicas: 3
+  # TODO: Strategie RollingUpdate mit maxSurge: 1 und maxUnavailable: 0 ergänzen
+  selector:
+    matchLabels:
+      app: hello-frontend
+      tier: frontend
+  template:
+    metadata:
+      labels:
+        app: hello-frontend
+        tier: frontend
+        version: v1
+    spec:
+      containers:
+        - name: frontend
+          image: hello-frontend:v1
+          imagePullPolicy: Never
+          ports:
+            - containerPort: 80
+          env:
+            - name: BACKEND_URL
+              value: "http://backend"

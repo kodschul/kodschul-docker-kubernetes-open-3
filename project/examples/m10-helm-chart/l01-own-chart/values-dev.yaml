@@ -1,0 +1,7 @@
+# Werte für eine Test-Umgebung; alles andere kommt aus hello/values.yaml.
+#   helm install hello hello -n hello-demo --create-namespace -f values-dev.yaml
+replicas: 1
+color: lightgreen
+nodePort: 30081                # 30080 belegt der Service frontend aus dem Namespace hello
+backend:
+  replicas: 1

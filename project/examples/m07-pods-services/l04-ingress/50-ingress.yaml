@@ -1,0 +1,29 @@
+# Ingress "hello": eine Adresse, Routing nach Hostname und Pfad (Lab 7.4, Trainer-Demo)
+# Voraussetzungen: Traefik per Helm installiert (siehe traefik-values.yaml),
+# Services "backend" und "frontend" aus Lab 7.2/7.3 im Namespace hello.
+#   kubectl apply -f examples/m07-pods-services/l04-ingress/50-ingress.yaml
+#   Browser: http://hello.localhost  und  http://hello.localhost/api
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: hello
+spec:
+  ingressClassName: traefik         # welcher Ingress-Controller zuständig ist
+  rules:
+    - host: hello.localhost         # nur Anfragen an diesen Hostnamen
+      http:
+        paths:
+          - path: /api              # http://hello.localhost/api...
+            pathType: Prefix        # alles, was mit /api beginnt
+            backend:
+              service:
+                name: backend       # Service aus Lab 7.2
+                port:
+                  number: 80
+          - path: /                 # alles andere
+            pathType: Prefix
+            backend:
+              service:
+                name: frontend      # Service aus Lab 7.3
+                port:
+                  number: 80

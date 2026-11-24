@@ -1,0 +1,36 @@
+# Lab 3.2 – Healthcheck, Watch und Replikas (fertiger Stand)
+# Kopieren nach playground/compose.yml, Start im Ordner playground:  docker compose up -d
+# Watch (Entwicklungsmodus):  docker compose watch
+name: hello
+
+services:
+  backend:
+    image: hello-backend:v1
+    ports:
+      - "8081:80"
+    healthcheck:
+      # busybox-wget ist im Python-Alpine-Image enthalten (curl nicht); 127.0.0.1 statt localhost,
+      # weil wget sonst zuerst IPv6 (::1) versucht, auf dem Flask nicht lauscht
+      test: ["CMD", "wget", "-qO-", "http://127.0.0.1/healthz"]
+      interval: 5s                        # alle 5 Sekunden prüfen
+      timeout: 2s                         # Antwort muss nach 2 Sekunden da sein
+      retries: 3                          # nach 3 Fehlschlägen in Folge: unhealthy
+      start_period: 5s                    # Anlaufzeit, in der Fehlschläge nicht zählen
+
+  frontend:
+    image: hello-frontend:dev             # eigener Tag für den Entwicklungsstand; v1 bleibt unverändert
+    build: ./frontend                     # Dockerfile aus Lab 2.2 in playground/frontend/
+    ports:
+      - "80"                              # nur Container-Port: Docker wählt je Replika einen freien Rechner-Port
+    deploy:
+      replicas: 3                         # drei gleiche Frontend-Container
+    environment:
+      BACKEND_URL: http://backend
+      APP_COLOR: ${APP_COLOR:-lightblue}  # aus .env, sonst lightblue
+    depends_on:
+      backend:
+        condition: service_healthy        # erst starten, wenn das Backend "healthy" ist
+    develop:
+      watch:
+        - path: ./frontend/app.py
+          action: rebuild                 # Datei geändert -> Image neu bauen, Container ersetzen

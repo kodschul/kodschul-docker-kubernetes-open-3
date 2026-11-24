@@ -1,0 +1,53 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Release.Name }}-frontend                   # Release hello -> hello-frontend
+  labels:
+    app: {{ .Release.Name }}-frontend
+    tier: frontend
+spec:
+  replicas: {{ .Values.replicas }}
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 0
+  selector:
+    matchLabels:
+      app: {{ .Release.Name }}-frontend
+      tier: frontend
+  template:
+    metadata:
+      labels:
+        app: {{ .Release.Name }}-frontend
+        tier: frontend
+        version: {{ .Values.image.tag | quote }}
+    spec:
+      containers:
+        - name: frontend
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          ports:
+            - containerPort: 80
+          envFrom:                                     # BACKEND_URL und APP_COLOR (Lab 9.1)
+            - configMapRef:
+                name: {{ .Release.Name }}-config
+          readinessProbe:                              # Lab 8.4
+            httpGet:
+              path: /healthz
+              port: 80
+            periodSeconds: 5
+            failureThreshold: 2
+          livenessProbe:
+            httpGet:
+              path: /healthz
+              port: 80
+            periodSeconds: 10
+            failureThreshold: 3
+          resources:                                   # Lab 8.5
+            requests:
+              cpu: 100m
+              memory: 64Mi
+            limits:
+              cpu: 500m
+              memory: 128Mi

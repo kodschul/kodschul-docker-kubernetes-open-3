@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Release.Name }}-backend                    # Release hello -> hello-backend
+  labels:
+    app: {{ .Release.Name }}-backend
+    tier: backend
+spec:
+  replicas: {{ .Values.backend.replicas }}
+  selector:
+    matchLabels:
+      app: {{ .Release.Name }}-backend
+      tier: backend
+  template:
+    metadata:
+      labels:
+        app: {{ .Release.Name }}-backend
+        tier: backend
+        version: {{ .Values.backend.tag | quote }}
+    spec:
+      containers:
+        - name: backend
+          image: "{{ .Values.backend.repository }}:{{ .Values.backend.tag }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          ports:
+            - containerPort: 80

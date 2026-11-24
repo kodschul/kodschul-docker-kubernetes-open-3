@@ -1,0 +1,10 @@
+# ConfigMap der Hello-App (Lab 9.1): Einstellungen, die nicht ins Image gehören
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: hello-config
+  labels:
+    app: hello-frontend
+data:
+  BACKEND_URL: http://backend      # Service backend (Lab 7.2)
+  APP_COLOR: lightpink             # überschreibt APP_COLOR=lightgreen aus dem v2-Image

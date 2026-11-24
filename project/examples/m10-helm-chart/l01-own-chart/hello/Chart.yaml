@@ -1,0 +1,7 @@
+# Steckbrief des Charts
+apiVersion: v2                 # Chart-API v2 (Helm 3 und Helm 4)
+name: hello                    # Name des Charts
+description: Hello-App (Frontend und Backend) aus dem Kurs Docker & Kubernetes Grundlagen
+type: application              # installierbares Chart
+version: 0.1.0                 # Version des Charts; steigt bei jeder Änderung am Chart
+appVersion: "v1"               # Version der App (nur Information)

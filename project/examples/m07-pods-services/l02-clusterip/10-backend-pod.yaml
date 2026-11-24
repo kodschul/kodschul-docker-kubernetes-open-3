@@ -1,0 +1,18 @@
+# Backend der Hello-App als einzelner Pod (Lab 7.1, unverändert in Lab 7.2)
+# Anwenden aus dem Ordner project/ (Namespace hello als Standard im Kontext, Lab 5.3):
+#   kubectl apply -f examples/m07-pods-services/l02-clusterip/
+apiVersion: v1                      # Pods gehören zur Kern-API
+kind: Pod
+metadata:
+  name: backend                     # Name des Pods, eindeutig im Namespace
+  labels:                           # Etiketten zum Wiederfinden und Auswählen
+    app: hello-backend              # Anwendung bzw. Dienst
+    tier: backend                   # Schicht
+    version: v1                     # laufende Version
+spec:
+  containers:
+    - name: backend                 # Name des Containers im Pod
+      image: hello-backend:v1       # lokal gebautes Image aus Lab 2.2
+      imagePullPolicy: Never        # nur das lokale Image nutzen, nie aus einer Registry laden
+      ports:
+        - containerPort: 80         # Flask lauscht im Container auf Port 80

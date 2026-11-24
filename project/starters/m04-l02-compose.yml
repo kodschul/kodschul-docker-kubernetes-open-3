@@ -1,0 +1,36 @@
+# Lab 4.2 – Starter: eigene Netzwerke in Compose
+# Kopieren nach playground/compose.yml, dann die "# TODO:"-Zeilen ersetzen.
+# Stand aus Lab 3.3 (Healthcheck, Volume hello-data).
+name: hello
+
+services:
+  backend:
+    image: hello-backend:v1
+    ports:
+      - "8081:80"                         # TODO: Port-Freigabe des Backends entfernen (beide Zeilen)
+    # TODO: Backend nur ins Netzwerk backend-net hängen (networks)
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "http://127.0.0.1/healthz"]
+      interval: 5s
+      timeout: 2s
+      retries: 3
+      start_period: 5s
+
+  frontend:
+    image: hello-frontend:v1
+    ports:
+      - "${FRONTEND_PORT:-8080}:80"
+    # TODO: Frontend in die Netzwerke frontend-net und backend-net hängen (networks)
+    environment:
+      BACKEND_URL: http://backend
+      APP_COLOR: ${APP_COLOR:-lightblue}
+    depends_on:
+      backend:
+        condition: service_healthy
+    volumes:
+      - hello-data:/data
+
+# TODO: Netzwerke frontend-net und backend-net auf oberster Ebene anlegen (networks)
+
+volumes:
+  hello-data:

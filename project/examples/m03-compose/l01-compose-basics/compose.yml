@@ -1,0 +1,17 @@
+# Lab 3.1 – Hello-App mit Docker Compose (fertiger Stand)
+# Kopieren nach playground/compose.yml (dazu .env), Start im Ordner playground:  docker compose up -d
+name: hello                               # Projektname (ohne diese Zeile: Ordnername "playground")
+
+services:
+  backend:
+    image: hello-backend:v1               # Image aus Lab 2.2
+    ports:
+      - "8081:80"                         # Backend direkt testbar: http://localhost:8081/api
+
+  frontend:
+    image: hello-frontend:v1              # Image aus Lab 2.2
+    ports:
+      - "${FRONTEND_PORT}:80"             # Rechner-Port aus .env, Container-Port 80
+    environment:
+      BACKEND_URL: http://backend         # Dienstname "backend" = Hostname im Projektnetzwerk (Port 80)
+      APP_COLOR: ${APP_COLOR}             # Hintergrundfarbe aus .env

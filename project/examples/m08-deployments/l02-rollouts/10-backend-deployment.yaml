@@ -1,0 +1,29 @@
+# Lab 8.2: Backend als Deployment "hello-backend" (ersetzt die Pods backend und backend-2 aus Modul 7)
+# Vorlage lässt sich erzeugen mit:
+#   kubectl create deployment hello-backend --image=hello-backend:v1 --port=80 --dry-run=client -o yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hello-backend
+  labels:
+    app: hello-backend
+    tier: backend
+spec:
+  replicas: 2                          # zwei Backend-Pods wie bisher backend und backend-2
+  selector:
+    matchLabels:                       # app + tier, nie version
+      app: hello-backend
+      tier: backend
+  template:
+    metadata:
+      labels:
+        app: hello-backend
+        tier: backend
+        version: v1
+    spec:
+      containers:
+        - name: backend
+          image: hello-backend:v1
+          imagePullPolicy: Never
+          ports:
+            - containerPort: 80

@@ -1,0 +1,57 @@
+# Lab 8.5: Frontend-Deployment mit Requests und Limits, ohne replicas (die Anzahl setzt der HPA)
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hello-frontend
+  labels:
+    app: hello-frontend
+    tier: frontend
+  annotations:
+    kubernetes.io/change-cause: "Requests und Limits"
+spec:
+  # kein replicas-Feld: der HPA "hello-frontend" bestimmt die Anzahl;
+  # ein Wert hier würde bei jedem kubectl apply dazwischenfunken
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 0
+  selector:
+    matchLabels:
+      app: hello-frontend
+      tier: frontend
+  template:
+    metadata:
+      labels:
+        app: hello-frontend
+        tier: frontend
+        version: v2
+    spec:
+      containers:
+        - name: frontend
+          image: hello-frontend:v2
+          imagePullPolicy: Never
+          ports:
+            - containerPort: 80
+          env:
+            - name: BACKEND_URL
+              value: "http://backend"
+          resources:
+            requests:                  # Planung: so viel reserviert der Scheduler auf dem Node
+              cpu: 100m                # 100 Millicores = 0,1 CPU-Kern; Bezugsgröße für den HPA
+              memory: 64Mi
+            limits:                    # Obergrenze zur Laufzeit
+              cpu: 500m                # mehr CPU -> gedrosselt
+              memory: 128Mi            # mehr Speicher -> OOMKilled
+          readinessProbe:
+            httpGet:
+              path: /healthz
+              port: 80
+            periodSeconds: 5
+            failureThreshold: 2
+          livenessProbe:
+            httpGet:
+              path: /healthz
+              port: 80
+            periodSeconds: 10
+            failureThreshold: 3

@@ -1,0 +1,16 @@
+# Lab 9.3 – Starter: PersistentVolumeClaim hello-data
+# Kopieren nach playground/k8s/07-pvc.yaml, TODOs ergänzen, dann:
+#   kubectl apply -f playground/k8s/07-pvc.yaml
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: hello-data
+  labels:
+    app: hello-frontend
+spec:
+  storageClassName: # TODO: StorageClass aus kubectl get storageclass (Docker Desktop: hostpath)
+  accessModes:
+    - # TODO: lesen und schreiben von einem Node aus
+  resources:
+    requests:
+      storage: # TODO: 100 Mebibyte

@@ -1,0 +1,56 @@
+# Frontend-Deployment mit Konfiguration aus der ConfigMap hello-config (Lab 9.1)
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hello-frontend
+  labels:
+    app: hello-frontend
+    tier: frontend
+  annotations:
+    kubernetes.io/change-cause: "Konfiguration aus ConfigMap hello-config"
+spec:
+  replicas: 3
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 0
+  selector:
+    matchLabels:                       # app + tier, nie version
+      app: hello-frontend
+      tier: frontend
+  template:
+    metadata:
+      labels:
+        app: hello-frontend
+        tier: frontend
+        version: v2
+    spec:
+      containers:
+        - name: frontend
+          image: hello-frontend:v2
+          imagePullPolicy: Never
+          ports:
+            - containerPort: 80
+          envFrom:                         # alle Schlüssel der ConfigMap als Umgebungsvariablen
+            - configMapRef:
+                name: hello-config
+          readinessProbe:                  # Lab 8.4
+            httpGet:
+              path: /healthz
+              port: 80
+            periodSeconds: 5
+            failureThreshold: 2
+          livenessProbe:
+            httpGet:
+              path: /healthz
+              port: 80
+            periodSeconds: 10
+            failureThreshold: 3
+          resources:                       # Lab 8.5
+            requests:
+              cpu: 100m
+              memory: 64Mi
+            limits:
+              cpu: 500m
+              memory: 128Mi

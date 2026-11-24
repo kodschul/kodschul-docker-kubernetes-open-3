@@ -1,0 +1,22 @@
+# Fehlerbild 2 (Lab 4.3): Hello-App auf Port 8092
+# Start im Ordner fehler2-netzwerk:  docker compose up -d
+services:
+  backend:
+    image: hello-backend:v1
+    networks:
+      - backend-net
+
+  frontend:
+    image: hello-frontend:v1
+    ports:
+      - "8092:80"
+    networks:
+      - frontend-net
+    environment:
+      BACKEND_URL: http://backend
+    depends_on:
+      - backend
+
+networks:
+  frontend-net:
+  backend-net:

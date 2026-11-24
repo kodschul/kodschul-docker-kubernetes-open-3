@@ -1,0 +1,6 @@
+# Namespace der Hello-App (Lab 5.3); als Standard im Kontext gesetzt:
+#   kubectl config set-context --current --namespace=hello
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: hello

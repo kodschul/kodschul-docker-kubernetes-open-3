@@ -1,0 +1,31 @@
+# Starter Lab 8.2: Backend-Deployment, fertig vorbereitet (keine Änderung nötig)
+# Kopieren nach playground/k8s/10-backend-deployment.yaml
+# Entspricht der Vorlage aus
+#   kubectl create deployment hello-backend --image=hello-backend:v1 --port=80 --dry-run=client -o yaml
+# mit den Labels der Hello-App, imagePullPolicy: Never und zwei Replikas.
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hello-backend
+  labels:
+    app: hello-backend
+    tier: backend
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: hello-backend
+      tier: backend
+  template:
+    metadata:
+      labels:
+        app: hello-backend
+        tier: backend
+        version: v1
+    spec:
+      containers:
+        - name: backend
+          image: hello-backend:v1
+          imagePullPolicy: Never
+          ports:
+            - containerPort: 80

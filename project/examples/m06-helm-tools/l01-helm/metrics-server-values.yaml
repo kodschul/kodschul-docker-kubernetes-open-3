@@ -1,0 +1,9 @@
+# Eigene Werte für das Chart metrics-server/metrics-server, Version 3.14.0 (Lab 6.1)
+# Anwenden aus dem Ordner project/:
+#   helm repo add metrics-server https://kubernetes-sigs.github.io/metrics-server/
+#   helm install metrics-server metrics-server/metrics-server --version 3.14.0 \
+#     -n kube-system -f examples/m06-helm-tools/l01-helm/metrics-server-values.yaml
+# Gleichwertig: --set 'args={--kubelet-insecure-tls}'
+
+args:
+  - --kubelet-insecure-tls   # Zertifikat des kubelet nicht prüfen; nur für das lokale Übungscluster (Docker Desktop)

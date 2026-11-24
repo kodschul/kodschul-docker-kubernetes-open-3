@@ -1,0 +1,18 @@
+# Service "frontend" vom Typ NodePort (Lab 7.3)
+# Docker Desktop: erreichbar unter http://localhost:30080 (prüfen)
+apiVersion: v1
+kind: Service
+metadata:
+  name: frontend
+  labels:
+    app: hello-frontend
+    tier: frontend
+spec:
+  type: NodePort                    # öffnet zusätzlich einen Port auf jedem Node
+  selector:
+    app: hello-frontend
+  ports:
+    - port: 80                      # Port der ClusterIP im Cluster: http://frontend:80
+      targetPort: 80                # Port im Frontend-Container
+      nodePort: 30080               # fester Port auf jedem Node (Bereich 30000-32767)
+      protocol: TCP

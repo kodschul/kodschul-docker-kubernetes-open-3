@@ -1,0 +1,59 @@
+# Starter Lab 8.5: Frontend-Deployment mit vorbereiteten Requests und Limits (keine Änderung nötig)
+# Kopieren nach playground/k8s/30-frontend-deployment.yaml (ersetzt die Datei), dann:
+#   kubectl apply -f playground/k8s/30-frontend-deployment.yaml
+# Neu gegenüber Lab 8.4: Block "resources" und kein Feld "replicas" mehr (die Anzahl setzt der HPA).
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hello-frontend
+  labels:
+    app: hello-frontend
+    tier: frontend
+  annotations:
+    kubernetes.io/change-cause: "Requests und Limits"
+spec:
+  # kein replicas-Feld: ab Lab 8.5 bestimmt der HPA die Anzahl
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 0
+  selector:
+    matchLabels:
+      app: hello-frontend
+      tier: frontend
+  template:
+    metadata:
+      labels:
+        app: hello-frontend
+        tier: frontend
+        version: v2
+    spec:
+      containers:
+        - name: frontend
+          image: hello-frontend:v2
+          imagePullPolicy: Never
+          ports:
+            - containerPort: 80
+          env:
+            - name: BACKEND_URL
+              value: "http://backend"
+          resources:                   # NEU in Lab 8.5
+            requests:                  # Planung: so viel reserviert der Scheduler
+              cpu: 100m                # 0,1 CPU-Kern; der HPA rechnet in Prozent davon
+              memory: 64Mi
+            limits:                    # Obergrenze zur Laufzeit
+              cpu: 500m
+              memory: 128Mi
+          readinessProbe:
+            httpGet:
+              path: /healthz
+              port: 80
+            periodSeconds: 5
+            failureThreshold: 2
+          livenessProbe:
+            httpGet:
+              path: /healthz
+              port: 80
+            periodSeconds: 10
+            failureThreshold: 3

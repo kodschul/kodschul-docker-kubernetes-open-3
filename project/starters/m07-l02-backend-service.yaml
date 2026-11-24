@@ -1,0 +1,17 @@
+# Starter Lab 7.2: Service für das Backend
+# Kopieren nach playground/k8s/20-backend-service.yaml und die TODOs ergänzen.
+apiVersion: v1
+kind: Service
+metadata:
+  name: backend
+  labels:
+    app: hello-backend
+    tier: backend
+spec:
+  type: ClusterIP
+  selector:
+    # TODO: Label, das beide Backend-Pods tragen (app)
+  ports:
+    - protocol: TCP
+      # TODO: port (Port des Service) = 80
+      # TODO: targetPort (Port im Backend-Container) = 80

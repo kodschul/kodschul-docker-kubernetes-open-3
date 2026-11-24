@@ -1,0 +1,33 @@
+# Lab 8.3: Canary "hello-frontend-canary" mit v2 neben hello-frontend (v1, 3 Replikas)
+# Liegt im Unterordner canary/, damit "kubectl apply -f examples/m08-deployments/l03-versions/"
+# den Endstand ohne Canary herstellt. Einzeln anwenden:
+#   kubectl apply -f examples/m08-deployments/l03-versions/canary/
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hello-frontend-canary
+  labels:
+    app: hello-frontend
+    tier: frontend
+spec:
+  replicas: 1                          # 1 von 4 Pods hinter dem Service -> etwa 25 % der Anfragen
+  selector:
+    matchLabels:                       # eigener Selector: nur Pods mit version v2
+      app: hello-frontend
+      version: v2
+  template:
+    metadata:
+      labels:
+        app: hello-frontend            # gleiches app-Label: der Service "frontend" nimmt den Pod mit auf
+        tier: frontend
+        version: v2                    # eigenes Label: unterscheidet Canary und stabile Version
+    spec:
+      containers:
+        - name: frontend
+          image: hello-frontend:v2
+          imagePullPolicy: Never
+          ports:
+            - containerPort: 80
+          env:
+            - name: BACKEND_URL
+              value: "http://backend"

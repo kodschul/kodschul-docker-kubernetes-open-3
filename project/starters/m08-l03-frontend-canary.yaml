@@ -1,0 +1,29 @@
+# Starter Lab 8.3: Canary-Deployment mit v2 (1 Replika) neben hello-frontend (v1, 3 Replikas)
+# Kopieren nach playground/k8s/35-frontend-canary-deployment.yaml, TODOs ergänzen, dann:
+#   kubectl apply -f playground/k8s/35-frontend-canary-deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hello-frontend-canary
+  labels:
+    app: hello-frontend
+    tier: frontend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      # TODO: app (wie beim Service frontend) und version (v2) eintragen
+  template:
+    metadata:
+      labels:
+        # TODO: app, tier und version eintragen; app wie beim Service frontend, version: v2
+    spec:
+      containers:
+        - name: frontend
+          image: hello-frontend:v2
+          imagePullPolicy: Never
+          ports:
+            - containerPort: 80
+          env:
+            - name: BACKEND_URL
+              value: "http://backend"

@@ -1,0 +1,49 @@
+# Lab 8.4: Frontend-Deployment mit Readiness- und Liveness-Probe auf /healthz
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hello-frontend
+  labels:
+    app: hello-frontend
+    tier: frontend
+  annotations:
+    kubernetes.io/change-cause: "Probes auf /healthz"
+spec:
+  replicas: 3
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 0
+  selector:
+    matchLabels:
+      app: hello-frontend
+      tier: frontend
+  template:
+    metadata:
+      labels:
+        app: hello-frontend
+        tier: frontend
+        version: v2
+    spec:
+      containers:
+        - name: frontend
+          image: hello-frontend:v2
+          imagePullPolicy: Never
+          ports:
+            - containerPort: 80
+          env:
+            - name: BACKEND_URL
+              value: "http://backend"
+          readinessProbe:              # Darf der Pod Anfragen bekommen?
+            httpGet:
+              path: /healthz           # Antwort 200-399 = bestanden
+              port: 80
+            periodSeconds: 5           # alle 5 Sekunden prüfen
+            failureThreshold: 2        # 2 Fehlschläge in Folge (ca. 10 s) -> nicht bereit
+          livenessProbe:               # Lebt der Container noch?
+            httpGet:
+              path: /healthz
+              port: 80
+            periodSeconds: 10          # alle 10 Sekunden prüfen
+            failureThreshold: 3        # 3 Fehlschläge in Folge (ca. 30 s) -> Container-Neustart

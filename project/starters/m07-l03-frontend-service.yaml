@@ -1,0 +1,18 @@
+# Starter Lab 7.3: Service für das Frontend
+# Kopieren nach playground/k8s/40-frontend-service.yaml und die TODOs ergänzen.
+apiVersion: v1
+kind: Service
+metadata:
+  name: frontend
+  labels:
+    app: hello-frontend
+    tier: frontend
+spec:
+  # TODO: Typ NodePort
+  selector:
+    app: hello-frontend
+  ports:
+    - port: 80
+      targetPort: 80
+      protocol: TCP
+      # TODO: fester nodePort 30080

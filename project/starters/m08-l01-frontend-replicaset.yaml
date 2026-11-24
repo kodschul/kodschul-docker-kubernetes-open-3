@@ -1,0 +1,32 @@
+# Starter Lab 8.1: ReplicaSet für das Frontend
+# Kopieren nach playground/k8s/30-frontend-replicaset.yaml, TODOs ergänzen, dann:
+#   kubectl apply -f playground/k8s/30-frontend-replicaset.yaml
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  name: hello-frontend
+  labels:
+    app: hello-frontend
+    tier: frontend
+spec:
+  # TODO: Soll-Anzahl der Pods eintragen (3)
+  replicas:
+  selector:
+    matchLabels:
+      # TODO: dieselben Labels wie im Template eintragen, aber ohne version (app und tier)
+  template:
+    metadata:
+      labels:
+        app: hello-frontend
+        tier: frontend
+        version: v1
+    spec:
+      containers:
+        - name: frontend
+          image: hello-frontend:v1
+          imagePullPolicy: Never
+          ports:
+            - containerPort: 80
+          env:
+            - name: BACKEND_URL
+              value: "http://backend"

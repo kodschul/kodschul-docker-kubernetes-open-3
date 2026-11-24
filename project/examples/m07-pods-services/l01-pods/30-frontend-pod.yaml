@@ -1,0 +1,22 @@
+# Frontend der Hello-App als einzelner Pod (Lab 7.1)
+# BACKEND_URL enthält die Pod-IP des Backends. Die IP unten ist ein Beispiel:
+# eigene IP mit "kubectl get pod backend -o wide" ermitteln und hier eintragen.
+#   kubectl apply -f examples/m07-pods-services/l01-pods/30-frontend-pod.yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: frontend
+  labels:
+    app: hello-frontend
+    tier: frontend
+    version: v1
+spec:
+  containers:
+    - name: frontend
+      image: hello-frontend:v1      # hellblaue Version aus Lab 2.2
+      imagePullPolicy: Never
+      ports:
+        - containerPort: 80
+      env:                          # Umgebungsvariablen, wie docker run -e
+        - name: BACKEND_URL
+          value: "http://10.1.0.23" # Pod-IP des Backends (Beispielwert, ändert sich mit jedem neuen Backend-Pod)

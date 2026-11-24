@@ -1,0 +1,14 @@
+# PersistentVolumeClaim für access.log (Lab 9.3): Speicher über die StorageClass hostpath (Docker Desktop)
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: hello-data
+  labels:
+    app: hello-frontend
+spec:
+  storageClassName: hostpath     # weglassen = Default-StorageClass des Clusters
+  accessModes:
+    - ReadWriteOnce              # lesen und schreiben von einem Node aus
+  resources:
+    requests:
+      storage: 100Mi             # Mi = Mebibyte

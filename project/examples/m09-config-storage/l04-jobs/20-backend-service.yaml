@@ -1,0 +1,12 @@
+# Service "backend" (Lab 7.2): feste Adresse http://backend für alle Pods mit app: hello-backend
+apiVersion: v1
+kind: Service
+metadata:
+  name: backend
+spec:
+  type: ClusterIP
+  selector:
+    app: hello-backend
+  ports:
+    - port: 80                         # Port des Service
+      targetPort: 80                   # Port im Container

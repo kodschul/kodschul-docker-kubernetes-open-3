@@ -1,0 +1,17 @@
+# Zweiter Backend-Pod mit denselben Labels wie "backend" (Lab 7.2)
+# Der Service "backend" findet beide Pods über den Selector app: hello-backend.
+apiVersion: v1
+kind: Pod
+metadata:
+  name: backend-2                   # einziger Unterschied zu 10-backend-pod.yaml
+  labels:
+    app: hello-backend
+    tier: backend
+    version: v1
+spec:
+  containers:
+    - name: backend
+      image: hello-backend:v1
+      imagePullPolicy: Never
+      ports:
+        - containerPort: 80

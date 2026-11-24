@@ -1,0 +1,17 @@
+# Service "backend": feste Adresse und DNS-Name für alle Backend-Pods (Lab 7.2)
+# Im Namespace hello erreichbar als http://backend (Port 80)
+apiVersion: v1
+kind: Service
+metadata:
+  name: backend                     # wird zum DNS-Namen: backend.hello.svc.cluster.local
+  labels:
+    app: hello-backend
+    tier: backend
+spec:
+  type: ClusterIP                   # Standard: nur innerhalb des Clusters erreichbar
+  selector:                         # alle Pods mit diesem Label stehen hinter dem Service
+    app: hello-backend
+  ports:
+    - port: 80                      # Port des Service: http://backend:80
+      targetPort: 80                # Port im Container (containerPort des Backends)
+      protocol: TCP

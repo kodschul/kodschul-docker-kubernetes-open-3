@@ -1,0 +1,15 @@
+# Starter Lab 7.1: Backend als Pod
+# Kopieren nach playground/k8s/10-backend-pod.yaml und die TODOs ergänzen.
+apiVersion: v1
+kind: Pod
+metadata:
+  name: backend
+  labels:
+    # TODO: drei Labels: app = hello-backend, tier = backend, version = v1
+spec:
+  containers:
+    - name: backend
+      # TODO: Image hello-backend:v1
+      # TODO: imagePullPolicy so setzen, dass nur das lokale Image genutzt wird
+      ports:
+        - containerPort: 80

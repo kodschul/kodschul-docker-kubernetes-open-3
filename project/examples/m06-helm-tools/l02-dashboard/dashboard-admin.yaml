@@ -1,0 +1,27 @@
+# Zugangskonto mit allen Rechten für das Kubernetes Dashboard (Lab 6.2)
+# NUR für das eigene lokale Übungscluster: wer den Token hat, darf im Cluster alles.
+# Quelle: Kubernetes Dashboard, docs/user/access-control/creating-sample-user.md
+#
+# Anwenden aus dem Ordner project/ (nach der Installation des Dashboard-Charts):
+#   kubectl apply -f examples/m06-helm-tools/l02-dashboard/dashboard-admin.yaml
+#   kubectl -n kubernetes-dashboard create token admin-user
+# Entfernen:
+#   kubectl delete -f examples/m06-helm-tools/l02-dashboard/dashboard-admin.yaml
+apiVersion: v1
+kind: ServiceAccount            # Zugangskonto für Programme
+metadata:
+  name: admin-user
+  namespace: kubernetes-dashboard
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding        # gibt dem Konto Rechte im ganzen Cluster
+metadata:
+  name: admin-user
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: cluster-admin           # eingebaute Rolle: darf alles
+subjects:
+  - kind: ServiceAccount
+    name: admin-user
+    namespace: kubernetes-dashboard

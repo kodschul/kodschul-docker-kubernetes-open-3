@@ -1,0 +1,29 @@
+# Lab 3.2 – Starter: Healthcheck und Watch
+# Kopieren nach playground/compose.yml, dann die "# TODO:"-Zeilen ersetzen.
+name: hello
+
+services:
+  backend:
+    image: hello-backend:v1
+    ports:
+      - "8081:80"
+    healthcheck:
+      # TODO: Prüfbefehl (test) als Liste: CMD, wget, -qO-, http://127.0.0.1/healthz
+      interval: 5s                        # alle 5 Sekunden prüfen
+      timeout: 2s                         # Antwort muss nach 2 Sekunden da sein
+      retries: 3                          # nach 3 Fehlschlägen in Folge: unhealthy
+      start_period: 5s                    # Anlaufzeit, in der Fehlschläge nicht zählen
+
+  frontend:
+    image: hello-frontend:dev             # eigener Tag für den Entwicklungsstand; v1 bleibt unverändert
+    build: ./frontend                     # Dockerfile aus Lab 2.2 in playground/frontend/
+    ports:
+      - "${FRONTEND_PORT:-8080}:80"       # aus .env, sonst 8080
+    environment:
+      BACKEND_URL: http://backend
+      APP_COLOR: ${APP_COLOR:-lightblue}  # aus .env, sonst lightblue
+    depends_on:
+      backend:
+        # TODO: Bedingung "Backend ist healthy" (condition)
+    # TODO (Aufgabe 2): Watch ergänzen: develop > watch > Listeneintrag mit
+    #       path: ./frontend/app.py und action: rebuild

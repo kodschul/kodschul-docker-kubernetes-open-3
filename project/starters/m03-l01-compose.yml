@@ -1,0 +1,14 @@
+# Lab 3.1 – Starter: Hello-App mit Docker Compose
+# Kopieren nach playground/compose.yml, dann die "# TODO:"-Zeilen ersetzen.
+name: hello                               # Projektname (ohne diese Zeile: Ordnername "playground")
+
+services:
+  backend:
+    image: hello-backend:v1               # Image aus Lab 2.2
+    ports:
+      - "8081:80"                         # Backend direkt testbar: http://localhost:8081/api
+
+  frontend:
+    # TODO: Image hello-frontend:v1 festlegen (image)
+    # TODO: Rechner-Port 8080 mit Container-Port 80 verbinden (ports)
+    # TODO: Umgebungsvariable BACKEND_URL auf http://backend setzen (environment)

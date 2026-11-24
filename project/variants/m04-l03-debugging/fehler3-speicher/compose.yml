@@ -1,0 +1,19 @@
+# Fehlerbild 3 (Lab 4.3): Hello-App auf Port 8093
+# Start im Ordner fehler3-speicher:  docker compose up -d
+services:
+  backend:
+    image: hello-backend:v1
+    deploy:
+      resources:
+        limits:
+          memory: 8M
+          cpus: "0.5"
+
+  frontend:
+    image: hello-frontend:v1
+    ports:
+      - "8093:80"
+    environment:
+      BACKEND_URL: http://backend
+    depends_on:
+      - backend

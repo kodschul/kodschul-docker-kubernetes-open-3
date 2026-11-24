@@ -1,0 +1,26 @@
+# Lab 9.4 – Starter: Job hello-count
+# Kopieren nach playground/k8s/50-job-count.yaml, TODOs ergänzen, dann:
+#   kubectl apply -f playground/k8s/50-job-count.yaml
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: hello-count
+  labels:
+    app: hello-frontend
+spec:
+  backoffLimit: 2                   # bei Fehler höchstens 2 weitere Versuche
+  template:                         # Pod-Bauplan wie beim Deployment
+    spec:
+      restartPolicy: # TODO: bei Fehler neuer Pod statt Neustart im selben Pod
+      containers:
+        - name: count
+          image: busybox:1.37
+          command: # TODO: Liste, die wc -l /data/access.log ausführt, z. B. ["befehl", "argument", ...]
+          volumeMounts:
+            - name: data
+              mountPath: /data
+              readOnly: true        # der Job liest nur
+      volumes:
+        - name: data
+          persistentVolumeClaim:
+            claimName: hello-data   # derselbe Claim wie das Frontend (Lab 9.3)

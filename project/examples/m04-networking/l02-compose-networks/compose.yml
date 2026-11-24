@@ -1,0 +1,39 @@
+# Lab 4.2 – Netzwerke in Compose (fertiger Stand)
+# Kopieren nach playground/compose.yml, Start im Ordner playground:  docker compose up -d
+name: hello
+
+services:
+  backend:
+    image: hello-backend:v1
+    # kein ports: mehr – das Backend ist nur noch im Netzwerk backend-net erreichbar
+    networks:
+      - backend-net
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "http://127.0.0.1/healthz"]
+      interval: 5s
+      timeout: 2s
+      retries: 3
+      start_period: 5s
+
+  frontend:
+    image: hello-frontend:v1
+    ports:
+      - "${FRONTEND_PORT:-8080}:80"       # einziger Weg von außen in die Anwendung
+    networks:
+      - frontend-net                      # Seite für Browser bzw. später einen Proxy
+      - backend-net                       # Weg zum Backend
+    environment:
+      BACKEND_URL: http://backend
+      APP_COLOR: ${APP_COLOR:-lightblue}
+    depends_on:
+      backend:
+        condition: service_healthy
+    volumes:
+      - hello-data:/data
+
+networks:
+  frontend-net:                           # Compose legt hello_frontend-net an
+  backend-net:                            # Compose legt hello_backend-net an
+
+volumes:
+  hello-data:

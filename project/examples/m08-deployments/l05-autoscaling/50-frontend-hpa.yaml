@@ -1,0 +1,22 @@
+# Lab 8.5: HorizontalPodAutoscaler "hello-frontend": 1 bis 5 Pods, Ziel 50 % CPU
+# Entspricht dem Befehl aus der Übung:
+#   kubectl autoscale deployment hello-frontend --cpu=50% --min=1 --max=5
+# Voraussetzung: metrics-server läuft (Lab 6.1, "kubectl top pods" zeigt Werte)
+apiVersion: autoscaling/v2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: hello-frontend
+spec:
+  scaleTargetRef:                      # welches Objekt skaliert wird
+    apiVersion: apps/v1
+    kind: Deployment
+    name: hello-frontend
+  minReplicas: 1                       # nie weniger als 1 Pod
+  maxReplicas: 5                       # nie mehr als 5 Pods
+  metrics:
+    - type: Resource                   # Messwert aus dem metrics-server (CPU oder Speicher)
+      resource:
+        name: cpu
+        target:
+          type: Utilization            # in Prozent des CPU-Requests (100m)
+          averageUtilization: 50       # Ziel: im Mittel 50 % = 50m je Pod

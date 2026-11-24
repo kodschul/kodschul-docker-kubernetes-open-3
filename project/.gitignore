@@ -1,0 +1,14 @@
+# Python
+__pycache__/
+*.pyc
+.venv/
+# Geheimnisse und lokale Einstellungen
+.env
+!.env.example
+# Kursbeispiel ohne Geheimnisse (Lab 3.1)
+!examples/m03-compose/l01-compose-basics/.env
+# Helm-Pakete und Abhängigkeiten
+*.tgz
+# Betriebssystem und Editor
+.DS_Store
+Thumbs.db

@@ -1,0 +1,34 @@
+# Lab 9.4 – Starter: CronJob hello-backup
+# Kopieren nach playground/k8s/60-cronjob-backup.yaml, TODOs ergänzen, dann:
+#   kubectl apply -f playground/k8s/60-cronjob-backup.yaml
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: hello-backup
+  labels:
+    app: hello-frontend
+spec:
+  schedule: # TODO: Cron-Ausdruck für "alle 2 Minuten", in Anführungszeichen
+  concurrencyPolicy: # TODO: kein neuer Lauf, solange der vorige noch läuft
+  successfulJobsHistoryLimit: 3       # so viele erledigte Jobs bleiben sichtbar
+  failedJobsHistoryLimit: 1
+  jobTemplate:                        # Bauplan des Jobs ...
+    spec:
+      backoffLimit: 2
+      template:                       # ... mit Pod-Bauplan
+        spec:
+          restartPolicy: Never
+          containers:
+            - name: backup
+              image: busybox:1.37
+              command:
+                - /bin/sh
+                - -c
+                - mkdir -p /data/backup && cp /data/access.log /data/backup/access-$(date +%Y%m%d-%H%M%S).log && ls /data/backup
+              volumeMounts:
+                - name: data
+                  mountPath: /data
+          volumes:
+            - name: data
+              persistentVolumeClaim:
+                claimName: hello-data

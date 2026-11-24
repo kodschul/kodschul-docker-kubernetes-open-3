@@ -1,0 +1,42 @@
+# Starter Lab 8.4: Frontend-Deployment (Stand nach Lab 8.3: v2, 3 Replikas) ohne Probes
+# Kopieren nach playground/k8s/30-frontend-deployment.yaml (ersetzt die Datei), TODOs ergänzen, dann:
+#   kubectl apply -f playground/k8s/30-frontend-deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hello-frontend
+  labels:
+    app: hello-frontend
+    tier: frontend
+  annotations:
+    kubernetes.io/change-cause: "Probes auf /healthz"
+spec:
+  replicas: 3
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 0
+  selector:
+    matchLabels:
+      app: hello-frontend
+      tier: frontend
+  template:
+    metadata:
+      labels:
+        app: hello-frontend
+        tier: frontend
+        version: v2
+    spec:
+      containers:
+        - name: frontend
+          image: hello-frontend:v2
+          imagePullPolicy: Never
+          ports:
+            - containerPort: 80
+          env:
+            - name: BACKEND_URL
+              value: "http://backend"
+          # TODO: readinessProbe mit httpGet auf path /healthz, port 80, periodSeconds 5, failureThreshold 2
+          # TODO: livenessProbe mit httpGet auf path /healthz, port 80, periodSeconds 10, failureThreshold 3
+          #       (Einrückung: auf gleicher Höhe wie env, ports und image)

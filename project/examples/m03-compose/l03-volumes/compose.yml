@@ -1,0 +1,31 @@
+# Lab 3.3 – Volumes und Persistenz (fertiger Stand)
+# Kopieren nach playground/compose.yml, Start im Ordner playground:  docker compose up -d
+name: hello
+
+services:
+  backend:
+    image: hello-backend:v1
+    ports:
+      - "8081:80"
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "http://127.0.0.1/healthz"]
+      interval: 5s
+      timeout: 2s
+      retries: 3
+      start_period: 5s
+
+  frontend:
+    image: hello-frontend:v1
+    ports:
+      - "${FRONTEND_PORT:-8080}:80"
+    environment:
+      BACKEND_URL: http://backend
+      APP_COLOR: ${APP_COLOR:-lightblue}
+    depends_on:
+      backend:
+        condition: service_healthy
+    volumes:
+      - hello-data:/data                  # Named Volume: /data/access.log überlebt den Container
+
+volumes:
+  hello-data:                             # Compose legt das Volume an (Name: hello_hello-data)

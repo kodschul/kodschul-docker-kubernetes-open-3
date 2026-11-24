@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ .Release.Name }}-config                     # Release hello -> hello-config
+  labels:
+    app: {{ .Release.Name }}-frontend
+data:
+  BACKEND_URL: "http://{{ .Release.Name }}-backend"   # Service des Backends aus diesem Release
+  APP_COLOR: {{ .Values.color | quote }}               # quote setzt Anführungszeichen

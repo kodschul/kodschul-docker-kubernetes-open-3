@@ -1,0 +1,38 @@
+# Lab 8.2: Frontend als Deployment "hello-frontend" nach dem Rollout auf v2
+# (und dem Rollback vom kaputten v3, das per kubectl set image kam und nie in dieser Datei stand)
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hello-frontend
+  labels:
+    app: hello-frontend
+    tier: frontend
+  annotations:
+    kubernetes.io/change-cause: "Update auf v2"   # Grund der Änderung, erscheint in rollout history
+spec:
+  replicas: 3
+  strategy:
+    type: RollingUpdate                # Pods schrittweise ersetzen (Standard)
+    rollingUpdate:
+      maxSurge: 1                      # höchstens 1 Pod über replicas während des Updates
+      maxUnavailable: 0                # nie weniger als replicas bereite Pods
+  selector:
+    matchLabels:                       # app + tier, nie version (die ändert sich bei jedem Update)
+      app: hello-frontend
+      tier: frontend
+  template:                            # jede Änderung hier startet einen Rollout
+    metadata:
+      labels:
+        app: hello-frontend
+        tier: frontend
+        version: v2                    # Label passt zur Image-Version
+    spec:
+      containers:
+        - name: frontend
+          image: hello-frontend:v2     # grüne Seite "Hello-App v2"
+          imagePullPolicy: Never
+          ports:
+            - containerPort: 80
+          env:
+            - name: BACKEND_URL
+              value: "http://backend"

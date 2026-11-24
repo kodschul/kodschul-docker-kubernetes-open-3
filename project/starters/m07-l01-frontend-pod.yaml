@@ -1,0 +1,19 @@
+# Starter Lab 7.1: Frontend als Pod
+# Kopieren nach playground/k8s/30-frontend-pod.yaml und das TODO ergänzen.
+apiVersion: v1
+kind: Pod
+metadata:
+  name: frontend
+  labels:
+    app: hello-frontend
+    tier: frontend
+    version: v1
+spec:
+  containers:
+    - name: frontend
+      image: hello-frontend:v1
+      imagePullPolicy: Never
+      ports:
+        - containerPort: 80
+      # TODO: Umgebungsvariable BACKEND_URL mit dem Wert http://<IP des Backend-Pods>
+      #       (IP aus "kubectl get pod backend -o wide")

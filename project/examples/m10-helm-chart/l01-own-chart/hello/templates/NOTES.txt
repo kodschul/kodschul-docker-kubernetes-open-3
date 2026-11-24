@@ -1,0 +1,3 @@
+Hello-App installiert: Release "{{ .Release.Name }}" im Namespace "{{ .Release.Namespace }}" (Chart {{ .Chart.Name }}-{{ .Chart.Version }}).
+
+Frontend {{ .Values.image.tag }}, Replikas: {{ .Values.replicas }}, Adresse: http://localhost:{{ .Values.nodePort }}

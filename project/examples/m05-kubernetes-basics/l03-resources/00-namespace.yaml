@@ -1,0 +1,8 @@
+# Namespace der Hello-App (Lab 5.3)
+# Anwenden aus dem Ordner project/:
+#   kubectl apply -f examples/m05-kubernetes-basics/l03-resources/
+#   kubectl config set-context --current --namespace=hello
+apiVersion: v1          # Kern-API
+kind: Namespace         # Ressourcentyp
+metadata:
+  name: hello           # alle Objekte der Hello-App liegen ab Lab 7.1 hier

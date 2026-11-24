@@ -1,0 +1,30 @@
+# Lab 3.3 – Starter: Volume für access.log
+# Kopieren nach playground/compose.yml, dann die "# TODO:"-Zeilen ersetzen.
+# Stand aus Lab 3.2 ohne Watch und Replikas: ein Frontend aus dem fertigen Image auf Port 8080.
+name: hello
+
+services:
+  backend:
+    image: hello-backend:v1
+    ports:
+      - "8081:80"
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "http://127.0.0.1/healthz"]
+      interval: 5s
+      timeout: 2s
+      retries: 3
+      start_period: 5s
+
+  frontend:
+    image: hello-frontend:v1
+    ports:
+      - "${FRONTEND_PORT:-8080}:80"
+    environment:
+      BACKEND_URL: http://backend
+      APP_COLOR: ${APP_COLOR:-lightblue}
+    depends_on:
+      backend:
+        condition: service_healthy
+    # TODO: Named Volume hello-data im Container unter /data einbinden (volumes)
+
+# TODO: Named Volume hello-data auf oberster Ebene anlegen (volumes)

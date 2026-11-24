@@ -1,0 +1,27 @@
+# Lab 4.4 – Hello-App als Swarm-Stack (Trainer-Demo, zum Nachmachen)
+# Start:  docker swarm init  &&  docker stack deploy -c stack.yml hello
+# Ende:   docker stack rm hello  &&  docker swarm leave --force
+# Swarm baut keine Images: hello-backend:v1, hello-frontend:v1 und :v2 müssen vorhanden sein (Lab 2.2).
+services:
+  backend:
+    image: hello-backend:v1
+    deploy:
+      replicas: 2                         # zwei Backend-Tasks
+    healthcheck:                          # wie in Lab 3.2
+      test: ["CMD", "wget", "-qO-", "http://127.0.0.1/healthz"]
+      interval: 5s
+      timeout: 2s
+      retries: 3
+      start_period: 5s
+
+  frontend:
+    image: hello-frontend:v1
+    environment:
+      BACKEND_URL: http://backend         # Dienstname, im Swarm eine virtuelle IP vor allen Backend-Tasks
+    ports:
+      - "8080:80"                         # Routing Mesh: Port 8080 auf jedem Node
+    deploy:
+      replicas: 3                         # gewünschter Zustand: drei Frontend-Tasks
+      update_config:
+        parallelism: 1                    # Rolling Update: ein Task nach dem anderen
+        delay: 5s                         # 5 Sekunden Pause zwischen zwei Tasks

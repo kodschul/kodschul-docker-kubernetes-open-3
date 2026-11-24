@@ -1,0 +1,33 @@
+# Werte für das Chart traefik/traefik, Version 42.4.2 (Traefik v3.7.19), Lab 7.4 (Trainer-Demo)
+# Alle Einträge entsprechen den Standardwerten des Charts (geprüft mit "helm show values", 24.11.2026);
+# sie stehen hier, damit sichtbar ist, warum Traefik auf localhost:80 antwortet.
+#
+#   helm repo add traefik https://traefik.github.io/charts
+#   helm repo update
+#   helm install traefik traefik/traefik --version 42.4.2 -n traefik --create-namespace \
+#     -f examples/m07-pods-services/l04-ingress/traefik-values.yaml
+#
+# Docker Desktop veröffentlicht Services vom Typ LoadBalancer auf localhost (prüfen).
+# Port 80 und 443 auf dem Laptop müssen frei sein.
+
+service:
+  spec:
+    type: LoadBalancer          # Service "traefik" bekommt eine externe Adresse (Docker Desktop: localhost)
+
+ports:
+  web:
+    port: 8000                  # Port im Traefik-Container
+    exposedPort: 80             # Port nach außen: http://hello.localhost
+  websecure:
+    port: 8443
+    exposedPort: 443            # HTTPS, in der Demo nicht genutzt
+
+ingressClass:
+  enabled: true                 # legt die IngressClass "traefik" an
+  isDefaultClass: true          # Ingress-Objekte ohne ingressClassName gehen ebenfalls an Traefik
+
+providers:
+  kubernetesIngress:
+    enabled: true               # Traefik liest Ingress-Objekte
+  kubernetesGateway:
+    enabled: false              # Gateway API ausgeschaltet (Ausblick, nicht Teil der Demo)

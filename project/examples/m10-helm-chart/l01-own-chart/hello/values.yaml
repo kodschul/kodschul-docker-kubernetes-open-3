@@ -1,0 +1,17 @@
+# Standardwerte des Charts hello.
+# Überschreiben: helm install ... --set image.tag=v2   oder   -f values-dev.yaml
+
+# Frontend
+image:
+  repository: hello-frontend
+  tag: v1                      # v1 (blau) oder v2 (grün); Farbe der Seite kommt aus color
+  pullPolicy: Never            # lokal gebautes Image (Lab 2.2)
+replicas: 2                    # Anzahl Frontend-Pods
+color: lightyellow             # Hintergrundfarbe, landet in der ConfigMap (Lab 9.1)
+nodePort: 30080                # Port auf dem Node (30000-32767), je Cluster nur einmal vergeben
+
+# Backend
+backend:
+  repository: hello-backend
+  tag: v1
+  replicas: 2

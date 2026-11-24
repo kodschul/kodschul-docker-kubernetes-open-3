@@ -1,0 +1,16 @@
+# Fehlerbild 1 (Lab 4.3): Hello-App auf Port 8091
+# Liegt nach dem Kopieren in playground/debugging/fehler1-cmd; Start dort:  docker compose up -d --build
+services:
+  backend:
+    image: hello-backend:v1
+
+  frontend:
+    build:
+      context: ../../frontend                         # Quellcode aus playground/frontend
+      dockerfile: ../debugging/fehler1-cmd/Dockerfile # Pfad relativ zum Kontext: das Dockerfile dieses Ordners
+    ports:
+      - "8091:80"
+    environment:
+      BACKEND_URL: http://backend
+    depends_on:
+      - backend

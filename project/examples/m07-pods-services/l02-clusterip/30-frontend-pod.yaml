@@ -1,0 +1,20 @@
+# Frontend-Pod, erreicht das Backend über den Service-Namen (Lab 7.2)
+# Ein laufender Pod lässt sich nicht ändern: vorher "kubectl delete pod frontend".
+apiVersion: v1
+kind: Pod
+metadata:
+  name: frontend
+  labels:
+    app: hello-frontend
+    tier: frontend
+    version: v1
+spec:
+  containers:
+    - name: frontend
+      image: hello-frontend:v1
+      imagePullPolicy: Never
+      ports:
+        - containerPort: 80
+      env:
+        - name: BACKEND_URL
+          value: "http://backend"   # Service-Name statt Pod-IP; Port 80 ist der Standard für http

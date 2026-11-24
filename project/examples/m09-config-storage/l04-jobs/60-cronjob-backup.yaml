@@ -1,0 +1,33 @@
+# CronJob (Lab 9.4): kopiert access.log alle 2 Minuten nach /data/backup/access-<Zeitstempel>.log
+# Sofort auslösen: kubectl create job --from=cronjob/hello-backup hello-backup-manual
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: hello-backup
+  labels:
+    app: hello-frontend
+spec:
+  schedule: "*/2 * * * *"             # Minute Stunde Tag Monat Wochentag; immer in Anführungszeichen
+  concurrencyPolicy: Forbid           # kein zweiter Lauf, solange einer läuft
+  successfulJobsHistoryLimit: 3       # so viele erledigte Jobs bleiben sichtbar
+  failedJobsHistoryLimit: 1
+  jobTemplate:                        # Bauplan des Jobs ...
+    spec:
+      backoffLimit: 2
+      template:                       # ... mit Pod-Bauplan
+        spec:
+          restartPolicy: Never
+          containers:
+            - name: backup
+              image: busybox:1.37
+              command:
+                - /bin/sh
+                - -c
+                - mkdir -p /data/backup && cp /data/access.log /data/backup/access-$(date +%Y%m%d-%H%M%S).log && ls /data/backup
+              volumeMounts:
+                - name: data
+                  mountPath: /data
+          volumes:
+            - name: data
+              persistentVolumeClaim:
+                claimName: hello-data

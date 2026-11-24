@@ -1,0 +1,48 @@
+# Lab 4.3 – Ressourcengrenzen (fertiger Stand, Hello-App am Ende von Tag 1)
+# Kopieren nach playground/compose.yml, Start im Ordner playground:  docker compose up -d
+name: hello
+
+services:
+  backend:
+    image: hello-backend:v1
+    networks:
+      - backend-net
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "http://127.0.0.1/healthz"]
+      interval: 5s
+      timeout: 2s
+      retries: 3
+      start_period: 5s
+    deploy:
+      resources:
+        limits:
+          memory: 128M                    # harte Speichergrenze; darüber beendet der Kernel den Prozess (137)
+          cpus: "0.5"                     # höchstens ein halber CPU-Kern; darüber wird gebremst
+
+  frontend:
+    image: hello-frontend:v1
+    ports:
+      - "${FRONTEND_PORT:-8080}:80"
+    networks:
+      - frontend-net
+      - backend-net
+    environment:
+      BACKEND_URL: http://backend
+      APP_COLOR: ${APP_COLOR:-lightblue}
+    depends_on:
+      backend:
+        condition: service_healthy
+    volumes:
+      - hello-data:/data
+    deploy:
+      resources:
+        limits:
+          memory: 128M
+          cpus: "0.5"
+
+networks:
+  frontend-net:
+  backend-net:
+
+volumes:
+  hello-data:

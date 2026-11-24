@@ -1,0 +1,69 @@
+# Frontend-Deployment mit ConfigMap, Secret und PVC hello-data unter /data (Lab 9.3)
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hello-frontend
+  labels:
+    app: hello-frontend
+    tier: frontend
+  annotations:
+    kubernetes.io/change-cause: "access.log auf PVC hello-data, 1 Replika"
+spec:
+  replicas: 1                          # ein Pod: alle Zeilen in access.log stammen von ihm
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 0
+  selector:
+    matchLabels:                       # app + tier, nie version
+      app: hello-frontend
+      tier: frontend
+  template:
+    metadata:
+      labels:
+        app: hello-frontend
+        tier: frontend
+        version: v2
+    spec:
+      containers:
+        - name: frontend
+          image: hello-frontend:v2
+          imagePullPolicy: Never
+          ports:
+            - containerPort: 80
+          envFrom:
+            - configMapRef:
+                name: hello-config
+          readinessProbe:
+            httpGet:
+              path: /healthz
+              port: 80
+            periodSeconds: 5
+            failureThreshold: 2
+          livenessProbe:
+            httpGet:
+              path: /healthz
+              port: 80
+            periodSeconds: 10
+            failureThreshold: 3
+          resources:
+            requests:
+              cpu: 100m
+              memory: 64Mi
+            limits:
+              cpu: 500m
+              memory: 128Mi
+          volumeMounts:
+            - name: data                     # access.log
+              mountPath: /data
+            - name: admin-secret             # Name des Volumes unten
+              mountPath: /etc/hello-secret   # je Schlüssel eine Datei: /etc/hello-secret/admin-password
+              readOnly: true                 # die App darf nur lesen
+      volumes:
+        - name: data
+          persistentVolumeClaim:
+            claimName: hello-data            # PVC im selben Namespace
+        - name: admin-secret
+          secret:
+            secretName: hello-secret
