@@ -27,7 +27,7 @@ docker exec -it webserver sh
 / # exit
 ```
 
-<img src="../../assets/images/m01/nginx-exec-geaendert.png" alt="Browser zeigt die Überschrift Hallo aus dem Container" width="520">
+<img src="https://raw.githubusercontent.com/kodschul/kodschul-docker-kubernetes-open-3/a9dffe75259ca48c06f42220eaa7c5f31bd02c77/assets/images/m01/nginx-exec-geaendert.png" alt="Browser zeigt die Überschrift Hallo aus dem Container" width="520">
 
 _Quelle: eigener Screenshot, nginx:1.29-alpine nach `docker exec`, 24.11.2026._
 
@@ -58,7 +58,7 @@ docker run -d --name webserver -p 8080:80 -v ./site:/usr/share/nginx/html nginx:
 <h1>Seite vom eigenen Rechner, Version 2</h1>
 ```
 
-<img src="../../assets/images/m01/bind-mount-seite.png" alt="Browser zeigt die Überschrift Seite vom eigenen Rechner, Version 2" width="520">
+<img src="https://raw.githubusercontent.com/kodschul/kodschul-docker-kubernetes-open-3/a9dffe75259ca48c06f42220eaa7c5f31bd02c77/assets/images/m01/bind-mount-seite.png" alt="Browser zeigt die Überschrift Seite vom eigenen Rechner, Version 2" width="520">
 
 _Quelle: eigener Screenshot, nginx:1.29-alpine mit Bind Mount, 24.11.2026._
 

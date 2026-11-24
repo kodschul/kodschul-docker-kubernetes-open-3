@@ -112,7 +112,7 @@ $ for i in 1 2 3 4 5 6; do curl -s http://localhost:8080 | grep Frontend; done
 
 Wird ein Task-Container gelöscht, weicht der tatsächliche vom gewünschten Zustand ab, und der Manager startet innerhalb weniger Sekunden einen Ersatz. Die Zeile mit `\_` ist der alte, beendete Task:
 
-<img src="../../assets/images/m04/swarm-service-ps.png" alt="Terminal: docker service ps hello_frontend nach dem Löschen eines Containers: hello_frontend.1 läuft neu seit 2 Sekunden, darunter der alte Task hello_frontend.1 mit Shutdown, Failed und task: non-zero exit (137); Tasks 2 bis 5 laufen weiter" width="760">
+<img src="https://raw.githubusercontent.com/kodschul/kodschul-docker-kubernetes-open-3/a9dffe75259ca48c06f42220eaa7c5f31bd02c77/assets/images/m04/swarm-service-ps.png" alt="Terminal: docker service ps hello_frontend nach dem Löschen eines Containers: hello_frontend.1 läuft neu seit 2 Sekunden, darunter der alte Task hello_frontend.1 mit Shutdown, Failed und task: non-zero exit (137); Tasks 2 bis 5 laufen weiter" width="760">
 
 _Quelle: eigener Screenshot (Ausgabe aus dem Testlauf der Demo, Docker Desktop als Ein-Node-Swarm), 24.11.2026._
 

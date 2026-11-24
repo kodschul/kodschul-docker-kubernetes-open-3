@@ -134,7 +134,7 @@ _Quelle: Docker Inc., „Docker build cache" (https://docs.docker.com/build/cach
 
 Ändert sich ein Schritt oder eine Datei, die er kopiert, baut Docker diesen und alle folgenden Schritte neu (Layer-Cache aus Lab 2.1). Deshalb steht Seltenes oben, Häufiges unten: erst `requirements.txt` und `pip install`, dann `app.py`. Nach einer Codeänderung kommt die Paketinstallation aus dem Cache:
 
-<img src="../../assets/images/m02/hello-build-cache.png" alt="Terminal: docker build nach einer Änderung an app.py; WORKDIR, COPY requirements.txt und RUN pip install sind CACHED, nur COPY app.py läuft neu" width="680">
+<img src="https://raw.githubusercontent.com/kodschul/kodschul-docker-kubernetes-open-3/a9dffe75259ca48c06f42220eaa7c5f31bd02c77/assets/images/m02/hello-build-cache.png" alt="Terminal: docker build nach einer Änderung an app.py; WORKDIR, COPY requirements.txt und RUN pip install sind CACHED, nur COPY app.py läuft neu" width="680">
 
 _Quelle: eigener Screenshot, Build des Hello-Frontends, 24.11.2026._
 
@@ -198,7 +198,7 @@ docker run -d --name hello-frontend -p 8080:80 -e APP_COLOR=orange hello-fronten
 
 `-e` überschreibt einen `ENV`-Wert nur für diesen Container; das Image bleibt unverändert. So läuft dasselbe Image in Test und Produktion mit verschiedenen Einstellungen.
 
-<img src="../../assets/images/m02/hello-frontend-v2.png" alt="Browser auf localhost:8080: hellgrüne Seite Hello-App v2 mit Container-ID und IP des Frontends, Backend nicht erreichbar (http://localhost:8081): ConnectionError, Admin: kein Passwort gesetzt" width="620">
+<img src="https://raw.githubusercontent.com/kodschul/kodschul-docker-kubernetes-open-3/a9dffe75259ca48c06f42220eaa7c5f31bd02c77/assets/images/m02/hello-frontend-v2.png" alt="Browser auf localhost:8080: hellgrüne Seite Hello-App v2 mit Container-ID und IP des Frontends, Backend nicht erreichbar (http://localhost:8081): ConnectionError, Admin: kein Passwort gesetzt" width="620">
 
 _Quelle: eigener Screenshot, `hello-frontend:v2` ohne Backend, 24.11.2026._
 

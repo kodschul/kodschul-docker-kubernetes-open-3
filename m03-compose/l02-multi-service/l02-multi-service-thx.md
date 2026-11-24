@@ -126,7 +126,7 @@ _Quelle: Docker Inc., „Announcing Docker Compose Watch GA Release" (https://ww
 
 `docker compose watch` startet die Dienste und beobachtet danach; `Strg+C` beendet nur das Beobachten, die Container laufen weiter. Nach einer Änderung an `frontend/app.py` meldet Watch den Neubau:
 
-<img src="../../assets/images/m03/compose-watch.png" alt="Terminal: docker compose watch meldet Watch enabled, nach der Änderung Rebuilding service frontend, Image hello-frontend:dev Built und für die Frontend-Container Recreate, Recreated und Started" width="680">
+<img src="https://raw.githubusercontent.com/kodschul/kodschul-docker-kubernetes-open-3/a9dffe75259ca48c06f42220eaa7c5f31bd02c77/assets/images/m03/compose-watch.png" alt="Terminal: docker compose watch meldet Watch enabled, nach der Änderung Rebuilding service frontend, Image hello-frontend:dev Built und für die Frontend-Container Recreate, Recreated und Started" width="680">
 
 _Quelle: eigener Screenshot, Hello-App mit compose.yml aus Lab 3.2, 24.11.2026._
 
@@ -149,7 +149,7 @@ Mehrere Kopien können nicht denselben Rechner-Port belegen. Bei skalierten Dien
       replicas: 3
 ```
 
-<img src="../../assets/images/m03/compose-ps-replicas.png" alt="Terminal: docker compose ps zeigt hello-backend-1 mit Status healthy auf Port 8081 und hello-frontend-1 bis -3 mit zufälligen Rechner-Ports 55162 bis 55164; docker compose port --index 2 frontend 80 gibt 0.0.0.0:55163 aus" width="760">
+<img src="https://raw.githubusercontent.com/kodschul/kodschul-docker-kubernetes-open-3/a9dffe75259ca48c06f42220eaa7c5f31bd02c77/assets/images/m03/compose-ps-replicas.png" alt="Terminal: docker compose ps zeigt hello-backend-1 mit Status healthy auf Port 8081 und hello-frontend-1 bis -3 mit zufälligen Rechner-Ports 55162 bis 55164; docker compose port --index 2 frontend 80 gibt 0.0.0.0:55163 aus" width="760">
 
 _Quelle: eigener Screenshot, Hello-App mit compose.yml aus Lab 3.2 (drei Replikas), 24.11.2026._
 

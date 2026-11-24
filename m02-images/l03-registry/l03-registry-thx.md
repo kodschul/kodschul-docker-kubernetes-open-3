@@ -106,7 +106,7 @@ docker pull 127.0.0.1:5001/hello-frontend:v1                      # herunterlade
 | `http://localhost:5001/v2/_catalog` | alle Repositories, z. B. `{"repositories":["hello-frontend"]}` |
 | `http://localhost:5001/v2/<name>/tags/list` | Tags eines Repositories, z. B. `{"name":"hello-frontend","tags":["v1"]}` |
 
-<img src="../../assets/images/m02/registry-push-catalog.png" alt="Terminal: Registry starten, hello-frontend:v1 als 127.0.0.1:5001/hello-frontend:v1 taggen und pushen, danach Katalog mit hello-frontend und Tag-Liste mit v1" width="720">
+<img src="https://raw.githubusercontent.com/kodschul/kodschul-docker-kubernetes-open-3/a9dffe75259ca48c06f42220eaa7c5f31bd02c77/assets/images/m02/registry-push-catalog.png" alt="Terminal: Registry starten, hello-frontend:v1 als 127.0.0.1:5001/hello-frontend:v1 taggen und pushen, danach Katalog mit hello-frontend und Tag-Liste mit v1" width="720">
 
 _Quelle: eigener Screenshot, Registry `registry:3`, 24.11.2026._
 

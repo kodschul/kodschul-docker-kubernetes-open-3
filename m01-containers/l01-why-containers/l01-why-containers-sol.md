@@ -76,7 +76,7 @@ Server: Docker Desktop 4.99.0 (245822)
  …
 ```
 
-<img src="../../assets/images/m01/docker-version.png" alt="Terminal mit docker version: Abschnitt Client mit Version 29.9.3 und OS/Arch darwin/arm64, Abschnitt Server Docker Desktop 4.99.0 mit Engine 29.9.3 auf linux/arm64, containerd v2.4.2 und runc 1.5.2" width="560">
+<img src="https://raw.githubusercontent.com/kodschul/kodschul-docker-open-3/3270d87fdfd7dfc684128aa2c830caaa21e0fd9d/assets/images/m01/docker-version.png" alt="Terminal mit docker version: Abschnitt Client mit Version 29.9.3 und OS/Arch darwin/arm64, Abschnitt Server Docker Desktop 4.99.0 mit Engine 29.9.3 auf linux/arm64, containerd v2.4.2 und runc 1.5.2" width="560">
 
 _Quelle: eigener Screenshot, Docker Desktop 4.99 auf macOS, 23.11.2026._
 

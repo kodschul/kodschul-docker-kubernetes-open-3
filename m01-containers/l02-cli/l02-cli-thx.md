@@ -64,7 +64,7 @@ docker run -d --name webserver -p 8080:80 nginx:1.29-alpine
 docker run -it --rm alpine:3.22 sh      # Shell in einem kleinen Linux; exit beendet und löscht den Container
 ```
 
-<img src="../../assets/images/m01/nginx-willkommen.png" alt="Browser mit der Startseite von nginx: Überschrift Welcome to nginx! und Hinweistext, dass der Webserver erfolgreich installiert ist" width="560">
+<img src="https://raw.githubusercontent.com/kodschul/kodschul-docker-kubernetes-open-3/a9dffe75259ca48c06f42220eaa7c5f31bd02c77/assets/images/m01/nginx-willkommen.png" alt="Browser mit der Startseite von nginx: Überschrift Welcome to nginx! und Hinweistext, dass der Webserver erfolgreich installiert ist" width="560">
 
 _Quelle: eigener Screenshot, nginx:1.29-alpine unter http://localhost:8080, 24.11.2026._
 
@@ -119,7 +119,7 @@ stateDiagram-v2
 
 Nach `stop` zeigt `docker ps -a` meist `Exited (0)`, nach `kill` `Exited (137)` (128 + Signal 9 = `SIGKILL`). Gelöscht wird immer nur der Container; das Image bleibt, und ein neues `docker run` beginnt wieder beim Originalzustand.
 
-<img src="../../assets/images/m01/docker-ps-a.png" alt="Terminal: zweiter nginx-Container auf Port 8080 scheitert mit port is already allocated, nach docker rm startet er auf 8081; nach docker stop und docker kill zeigt docker ps -a webserver2 mit Exited (0) und webserver mit Exited (137)" width="720">
+<img src="https://raw.githubusercontent.com/kodschul/kodschul-docker-kubernetes-open-3/a9dffe75259ca48c06f42220eaa7c5f31bd02c77/assets/images/m01/docker-ps-a.png" alt="Terminal: zweiter nginx-Container auf Port 8080 scheitert mit port is already allocated, nach docker rm startet er auf 8081; nach docker stop und docker kill zeigt docker ps -a webserver2 mit Exited (0) und webserver mit Exited (137)" width="720">
 
 _Quelle: eigener Screenshot, Docker Engine 29.9.3, 24.11.2026._
 

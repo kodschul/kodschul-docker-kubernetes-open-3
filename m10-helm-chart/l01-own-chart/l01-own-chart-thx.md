@@ -141,13 +141,13 @@ Artifact Hub ([artifacthub.io](https://artifacthub.io), Katalog öffentlicher Ch
 
 ## Prüfen vor dem Installieren
 
-<img src="../../assets/images/m10/helm-lint-hello.png" alt="Terminal: helm lint hello meldet INFO Chart.yaml: icon is recommended und 1 chart(s) linted, 0 chart(s) failed" width="520">
+<img src="https://raw.githubusercontent.com/kodschul/kodschul-docker-kubernetes-open-3/a9dffe75259ca48c06f42220eaa7c5f31bd02c77/assets/images/m10/helm-lint-hello.png" alt="Terminal: helm lint hello meldet INFO Chart.yaml: icon is recommended und 1 chart(s) linted, 0 chart(s) failed" width="520">
 
 _Quelle: eigener Screenshot, Helm v4.3.2, 24.11.2026._
 
 `helm lint` prüft Aufbau, `Chart.yaml` und Template-Syntax; der Hinweis auf ein fehlendes Icon ist kein Fehler.
 
-<img src="../../assets/images/m10/helm-template-werte.png" alt="Terminal: helm template mit values-dev.yaml und --set image.tag=v2, gefiltert mit grep: Namen hello-config, hello-backend, hello-frontend, APP_COLOR lightgreen, nodePort 30081, replicas 1, Image hello-frontend:v2" width="680">
+<img src="https://raw.githubusercontent.com/kodschul/kodschul-docker-kubernetes-open-3/a9dffe75259ca48c06f42220eaa7c5f31bd02c77/assets/images/m10/helm-template-werte.png" alt="Terminal: helm template mit values-dev.yaml und --set image.tag=v2, gefiltert mit grep: Namen hello-config, hello-backend, hello-frontend, APP_COLOR lightgreen, nodePort 30081, replicas 1, Image hello-frontend:v2" width="680">
 
 _Quelle: eigener Screenshot, Helm v4.3.2, 24.11.2026._
 

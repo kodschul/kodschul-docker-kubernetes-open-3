@@ -95,7 +95,7 @@ kubectl create configmap hello-config \
 
 Steht eine Variable doppelt, gewinnt `env` vor `envFrom`; beide gewinnen vor `ENV` aus dem Dockerfile. Deshalb verschwindet der feste `env`-Eintrag mit `BACKEND_URL` aus dem Deployment, sonst würde er die ConfigMap verdecken.
 
-<img src="../../assets/images/m09/hello-configmap-lightpink.png" alt="Hello-Seite Version v2 mit rosa Hintergrund, Frontend- und Backend-Antwort, Admin: kein Passwort gesetzt" width="560">
+<img src="https://raw.githubusercontent.com/kodschul/kodschul-docker-kubernetes-open-3/a9dffe75259ca48c06f42220eaa7c5f31bd02c77/assets/images/m09/hello-configmap-lightpink.png" alt="Hello-Seite Version v2 mit rosa Hintergrund, Frontend- und Backend-Antwort, Admin: kein Passwort gesetzt" width="560">
 
 _Quelle: eigener Screenshot, Hello-App `hello-frontend:v2` mit `APP_COLOR=lightpink` von außen gesetzt (aufgenommen mit `docker run`; im Cluster steht statt der Container-ID der Pod-Name), 24.11.2026._
 

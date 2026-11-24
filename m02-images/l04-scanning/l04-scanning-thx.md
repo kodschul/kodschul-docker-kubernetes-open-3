@@ -69,7 +69,7 @@ Docker Desktop zeigt dieselbe Analyse unter **Images** → Image auswählen → 
 
 Trivy-Scan des Hello-Frontends (Basis `python:3.14-alpine`, Alpine 3.24) und des veralteten `python:3.9-alpine` (Alpine 3.22, Python 3.9 ohne Sicherheitsupdates seit 31.10.2025 laut [Status of Python versions](https://devguide.python.org/versions/)):
 
-<img src="../../assets/images/m02/trivy-compare.png" alt="Terminal: Trivy findet in hello-frontend:v1 auf Alpine 3.24 11 Lücken im Betriebssystem ohne HIGH und CRITICAL und 8 in Python-Paketen; in python:3.9-alpine auf Alpine 3.22 113 Lücken mit 28 HIGH und 2 CRITICAL" width="720">
+<img src="https://raw.githubusercontent.com/kodschul/kodschul-docker-kubernetes-open-3/a9dffe75259ca48c06f42220eaa7c5f31bd02c77/assets/images/m02/trivy-compare.png" alt="Terminal: Trivy findet in hello-frontend:v1 auf Alpine 3.24 11 Lücken im Betriebssystem ohne HIGH und CRITICAL und 8 in Python-Paketen; in python:3.9-alpine auf Alpine 3.22 113 Lücken mit 28 HIGH und 2 CRITICAL" width="720">
 
 _Quelle: eigener Screenshot, Trivy 0.76.2, 24.11.2026._
 

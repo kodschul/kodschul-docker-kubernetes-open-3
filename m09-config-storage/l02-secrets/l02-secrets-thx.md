@@ -81,7 +81,7 @@ metadata:
 type: Opaque
 ```
 
-<img src="../../assets/images/m09/base64-zurueckwandeln.png" alt="Terminal: printf uebung-2026 | base64 ergibt dWVidW5nLTIwMjY=, echo dWVidW5nLTIwMjY= | base64 -d ergibt wieder uebung-2026" width="520">
+<img src="https://raw.githubusercontent.com/kodschul/kodschul-docker-kubernetes-open-3/a9dffe75259ca48c06f42220eaa7c5f31bd02c77/assets/images/m09/base64-zurueckwandeln.png" alt="Terminal: printf uebung-2026 | base64 ergibt dWVidW5nLTIwMjY=, echo dWVidW5nLTIwMjY= | base64 -d ergibt wieder uebung-2026" width="520">
 
 _Quelle: eigener Screenshot, bash unter macOS, 24.11.2026._
 
@@ -124,7 +124,7 @@ flowchart LR
 | Änderung | Datei wird nach bis zu ca. 1 Minute ersetzt | erst nach `rollout restart` |
 | Empfehlung | bevorzugt | nur, wenn die Software es nicht anders kann |
 
-<img src="../../assets/images/m09/hello-secret-passwort-gesetzt.png" alt="Hello-Seite v2 in Rosa mit der Zeile Admin: Passwort gesetzt" width="560">
+<img src="https://raw.githubusercontent.com/kodschul/kodschul-docker-kubernetes-open-3/a9dffe75259ca48c06f42220eaa7c5f31bd02c77/assets/images/m09/hello-secret-passwort-gesetzt.png" alt="Hello-Seite v2 in Rosa mit der Zeile Admin: Passwort gesetzt" width="560">
 
 _Quelle: eigener Screenshot, Hello-App `hello-frontend:v2` mit eingebundener Datei `/etc/hello-secret/admin-password` (aufgenommen mit `docker run`; im Cluster steht statt der Container-ID der Pod-Name), 24.11.2026._
 

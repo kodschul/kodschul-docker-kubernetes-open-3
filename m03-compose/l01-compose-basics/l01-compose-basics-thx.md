@@ -120,7 +120,7 @@ APP_COLOR=lightyellow
 | `docker compose config` | Datei mit eingesetzten Werten anzeigen |
 | `docker compose down` | Container und Projektnetzwerk stoppen und entfernen; Images bleiben |
 
-<img src="../../assets/images/m03/compose-ps.png" alt="Terminal: docker compose ps zeigt hello-backend-1 mit Image hello-backend:v1 auf Port 8081 und hello-frontend-1 mit Image hello-frontend:v1 auf Port 8080, beide Up" width="760">
+<img src="https://raw.githubusercontent.com/kodschul/kodschul-docker-kubernetes-open-3/a9dffe75259ca48c06f42220eaa7c5f31bd02c77/assets/images/m03/compose-ps.png" alt="Terminal: docker compose ps zeigt hello-backend-1 mit Image hello-backend:v1 auf Port 8081 und hello-frontend-1 mit Image hello-frontend:v1 auf Port 8080, beide Up" width="760">
 
 _Quelle: eigener Screenshot, Hello-App mit compose.yml aus Lab 3.1, 24.11.2026._
 
@@ -139,7 +139,7 @@ flowchart LR
   B2["Browser<br/>localhost:8081/api"] -- "Port 8081 -> 80" --> BE
 ```
 
-<img src="../../assets/images/m03/hello-compose.png" alt="Hello-App im Browser auf localhost:8080 mit hellgelbem Hintergrund: Überschrift Hello-App v1, Frontend mit Container-ID und IP, Backend-Antwort mit Container-ID, IP und Uhrzeit, Admin: kein Passwort gesetzt" width="620">
+<img src="https://raw.githubusercontent.com/kodschul/kodschul-docker-kubernetes-open-3/a9dffe75259ca48c06f42220eaa7c5f31bd02c77/assets/images/m03/hello-compose.png" alt="Hello-App im Browser auf localhost:8080 mit hellgelbem Hintergrund: Überschrift Hello-App v1, Frontend mit Container-ID und IP, Backend-Antwort mit Container-ID, IP und Uhrzeit, Admin: kein Passwort gesetzt" width="620">
 
 _Quelle: eigener Screenshot, Hello-App mit compose.yml und .env (APP_COLOR=lightyellow), 24.11.2026._
 

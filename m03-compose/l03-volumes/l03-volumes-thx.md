@@ -120,7 +120,7 @@ volumes:
 | `docker compose down` | gelöscht | gelöscht | bleiben | bleiben |
 | `docker compose down -v` | gelöscht | gelöscht | gelöscht | bleiben |
 
-<img src="../../assets/images/m03/volume-access-log.png" alt="Terminal: nach drei Seitenaufrufen hat /data/access.log 3 Zeilen; nach docker compose down, up -d und einem weiteren Aufruf 4 Zeilen; docker volume ls listet hello_hello-data" width="680">
+<img src="https://raw.githubusercontent.com/kodschul/kodschul-docker-kubernetes-open-3/a9dffe75259ca48c06f42220eaa7c5f31bd02c77/assets/images/m03/volume-access-log.png" alt="Terminal: nach drei Seitenaufrufen hat /data/access.log 3 Zeilen; nach docker compose down, up -d und einem weiteren Aufruf 4 Zeilen; docker volume ls listet hello_hello-data" width="680">
 
 _Quelle: eigener Screenshot, Hello-App mit compose.yml aus Lab 3.3, 24.11.2026._
 

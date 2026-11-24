@@ -100,7 +100,7 @@ docker images --filter "reference=hello-*"
 #10 naming to docker.io/library/hello-frontend:v2 done
 ```
 
-<img src="../../assets/images/m02/hello-images.png" alt="Terminal: docker images mit Filter auf hello-* listet hello-backend:v1 mit 99,6 MB sowie hello-frontend:v1 und hello-frontend:v2 mit je 105 MB" width="680">
+<img src="https://raw.githubusercontent.com/kodschul/kodschul-docker-kubernetes-open-3/a9dffe75259ca48c06f42220eaa7c5f31bd02c77/assets/images/m02/hello-images.png" alt="Terminal: docker images mit Filter auf hello-* listet hello-backend:v1 mit 99,6 MB sowie hello-frontend:v1 und hello-frontend:v2 mit je 105 MB" width="680">
 
 _Quelle: eigener Screenshot, Hello-Images, 24.11.2026._
 
@@ -122,7 +122,7 @@ docker run -d --name hello-frontend -p 8080:80 hello-frontend:v2
 
 `pod` enthält den Rechnernamen des Containers (seine gekürzte ID), `ip` seine Adresse im Docker-Netzwerk. Der Feldname `pod` stammt aus Kubernetes (Tag 2).
 
-<img src="../../assets/images/m02/hello-frontend-v2.png" alt="Browser auf localhost:8080: hellgrüne Seite Hello-App v2 mit Container-ID und IP des Frontends, Backend nicht erreichbar (http://localhost:8081): ConnectionError" width="620">
+<img src="https://raw.githubusercontent.com/kodschul/kodschul-docker-kubernetes-open-3/a9dffe75259ca48c06f42220eaa7c5f31bd02c77/assets/images/m02/hello-frontend-v2.png" alt="Browser auf localhost:8080: hellgrüne Seite Hello-App v2 mit Container-ID und IP des Frontends, Backend nicht erreichbar (http://localhost:8081): ConnectionError" width="620">
 
 _Quelle: eigener Screenshot, `hello-frontend:v2` ohne Backend, 24.11.2026._
 

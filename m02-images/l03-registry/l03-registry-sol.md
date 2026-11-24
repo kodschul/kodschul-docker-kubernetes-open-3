@@ -49,7 +49,7 @@ hello-frontend:v1                  1672f651f1b0        105MB         24.8MB
 | `http://localhost:5001/v2/_catalog` | `{"repositories":["hello-frontend"]}` |
 | `http://localhost:5001/v2/hello-frontend/tags/list` | `{"name":"hello-frontend","tags":["v1"]}` |
 
-<img src="../../assets/images/m02/registry-push-catalog.png" alt="Terminal: Registry starten, hello-frontend:v1 als 127.0.0.1:5001/hello-frontend:v1 taggen und pushen, danach Katalog mit hello-frontend und Tag-Liste mit v1" width="720">
+<img src="https://raw.githubusercontent.com/kodschul/kodschul-docker-kubernetes-open-3/a9dffe75259ca48c06f42220eaa7c5f31bd02c77/assets/images/m02/registry-push-catalog.png" alt="Terminal: Registry starten, hello-frontend:v1 als 127.0.0.1:5001/hello-frontend:v1 taggen und pushen, danach Katalog mit hello-frontend und Tag-Liste mit v1" width="720">
 
 _Quelle: eigener Screenshot, Registry `registry:3`, 24.11.2026._
 
@@ -74,7 +74,7 @@ Status: Downloaded newer image for 127.0.0.1:5001/hello-frontend:v1
 650781900d14df77c5b25836a147e67fedfc4887411c67c7fa34279909237154
 ```
 
-<img src="../../assets/images/m02/hello-registry-v1.png" alt="Browser: hellblaue Seite Hello-App v1 mit Container-ID und IP, Backend nicht erreichbar" width="620">
+<img src="https://raw.githubusercontent.com/kodschul/kodschul-docker-kubernetes-open-3/a9dffe75259ca48c06f42220eaa7c5f31bd02c77/assets/images/m02/hello-registry-v1.png" alt="Browser: hellblaue Seite Hello-App v1 mit Container-ID und IP, Backend nicht erreichbar" width="620">
 
 _Quelle: eigener Screenshot, `127.0.0.1:5001/hello-frontend:v1` aus der lokalen Registry, 24.11.2026._
 

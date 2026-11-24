@@ -96,7 +96,7 @@ _Quelle: Wikimedia Commons, „NAT Concept-en.svg" (https://commons.wikimedia.or
 
 Bei `-p 8080:80` spielt der Docker-Host die Rolle des Routers im Bild: Er übersetzt Anfragen an `localhost:8080` auf die private Container-IP, Port 80 (Network Address Translation, NAT). Die Container-IP bleibt außen unsichtbar.
 
-<img src="../../assets/images/m04/hello-net-page.png" alt="Hello-App v1 im Browser auf localhost:8080, gestartet ohne Compose im Netzwerk hello-net: Frontend 172.19.0.3, Backend-Antwort von 172.19.0.2" width="620">
+<img src="https://raw.githubusercontent.com/kodschul/kodschul-docker-kubernetes-open-3/a9dffe75259ca48c06f42220eaa7c5f31bd02c77/assets/images/m04/hello-net-page.png" alt="Hello-App v1 im Browser auf localhost:8080, gestartet ohne Compose im Netzwerk hello-net: Frontend 172.19.0.3, Backend-Antwort von 172.19.0.2" width="620">
 
 _Quelle: eigener Screenshot, Hello-App im Netzwerk hello-net (ohne Compose), 24.11.2026._
 
@@ -126,7 +126,7 @@ test 172.19.0.4/16
 
 `docker exec <container> wget -qO- -T 3 http://backend/api` prüft aus einem Container heraus, ob ein Name erreichbar ist: `wget` lädt die Adresse und gibt sie aus, `-T 3` bricht nach 3 Sekunden ab. `busybox:1.37` und die Hello-Images bringen `wget` mit.
 
-<img src="../../assets/images/m04/hello-net-connect.png" alt="Terminal: der Container test in der Standard-Bridge meldet wget: bad address backend; nach docker network connect hello-net test liefert derselbe Aufruf JSON des Backends; docker network inspect listet frontend, backend und test mit IPs aus 172.19.0.0/16" width="680">
+<img src="https://raw.githubusercontent.com/kodschul/kodschul-docker-kubernetes-open-3/a9dffe75259ca48c06f42220eaa7c5f31bd02c77/assets/images/m04/hello-net-connect.png" alt="Terminal: der Container test in der Standard-Bridge meldet wget: bad address backend; nach docker network connect hello-net test liefert derselbe Aufruf JSON des Backends; docker network inspect listet frontend, backend und test mit IPs aus 172.19.0.0/16" width="680">
 
 _Quelle: eigener Screenshot, Hello-App im Netzwerk hello-net, 24.11.2026._
 

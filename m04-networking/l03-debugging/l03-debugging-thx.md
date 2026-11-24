@@ -50,7 +50,7 @@ flowchart TD
 
 ## Container startet nicht: Exit-Code und Logs
 
-<img src="../../assets/images/m04/fehler-cmd-logs.png" alt="Terminal: docker compose ps -a zeigt fehler1-cmd-backend-1 mit Up und fehler1-cmd-frontend-1 mit Exited (2); docker compose logs frontend zeigt python: can't open file /app/main.py: No such file or directory" width="680">
+<img src="https://raw.githubusercontent.com/kodschul/kodschul-docker-kubernetes-open-3/a9dffe75259ca48c06f42220eaa7c5f31bd02c77/assets/images/m04/fehler-cmd-logs.png" alt="Terminal: docker compose ps -a zeigt fehler1-cmd-backend-1 mit Up und fehler1-cmd-frontend-1 mit Exited (2); docker compose logs frontend zeigt python: can't open file /app/main.py: No such file or directory" width="680">
 
 _Quelle: eigener Screenshot, Hello-App, Fehlerbild 1 aus `variants/m04-l03-debugging`, 24.11.2026._
 
@@ -66,7 +66,7 @@ Die Logs nennen die Datei, die fehlt. Ob sie im Image liegt, zeigt ein neuer Con
 
 ## Container läuft, Dienst nicht erreichbar
 
-<img src="../../assets/images/m04/fehler-netzwerk-page.png" alt="Hello-App v1 im Browser: Frontend mit Container-ID und IP, Backend: Backend nicht erreichbar (http://backend): ConnectionError" width="620">
+<img src="https://raw.githubusercontent.com/kodschul/kodschul-docker-kubernetes-open-3/a9dffe75259ca48c06f42220eaa7c5f31bd02c77/assets/images/m04/fehler-netzwerk-page.png" alt="Hello-App v1 im Browser: Frontend mit Container-ID und IP, Backend: Backend nicht erreichbar (http://backend): ConnectionError" width="620">
 
 _Quelle: eigener Screenshot, Hello-App, Fehlerbild 2 aus `variants/m04-l03-debugging`, 24.11.2026._
 
@@ -112,7 +112,7 @@ services:
 
 `docker compose up` wendet `deploy.resources.limits` auch ohne Swarm an. Quelle: Docker Docs, „Compose Deploy Specification" (https://docs.docker.com/reference/compose-file/deploy/) und „Resource constraints" (https://docs.docker.com/engine/containers/resource_constraints/), abgerufen am 24.11.2026.
 
-<img src="../../assets/images/m04/docker-stats-limits.png" alt="Terminal: docker stats --no-stream zeigt hello-frontend-1 mit 30,31 MiB von 128 MiB und hello-backend-1 mit 25,3 MiB von 128 MiB Speicher" width="680">
+<img src="https://raw.githubusercontent.com/kodschul/kodschul-docker-kubernetes-open-3/a9dffe75259ca48c06f42220eaa7c5f31bd02c77/assets/images/m04/docker-stats-limits.png" alt="Terminal: docker stats --no-stream zeigt hello-frontend-1 mit 30,31 MiB von 128 MiB und hello-backend-1 mit 25,3 MiB von 128 MiB Speicher" width="680">
 
 _Quelle: eigener Screenshot, Hello-App mit compose.yml aus Lab 4.3, 24.11.2026._
 
@@ -120,7 +120,7 @@ _Quelle: eigener Screenshot, Hello-App mit compose.yml aus Lab 4.3, 24.11.2026._
 
 Ein Container über seiner Speichergrenze endet ohne Fehlermeldung in den Logs; Gewissheit bringt `inspect`:
 
-<img src="../../assets/images/m04/fehler-speicher-oom.png" alt="Terminal: docker compose ps -a zeigt fehler3-speicher-backend-1 mit Exited (137); docker compose logs backend ist leer; docker inspect zeigt status=exited exit=137 oom=true limit=8388608" width="680">
+<img src="https://raw.githubusercontent.com/kodschul/kodschul-docker-kubernetes-open-3/a9dffe75259ca48c06f42220eaa7c5f31bd02c77/assets/images/m04/fehler-speicher-oom.png" alt="Terminal: docker compose ps -a zeigt fehler3-speicher-backend-1 mit Exited (137); docker compose logs backend ist leer; docker inspect zeigt status=exited exit=137 oom=true limit=8388608" width="680">
 
 _Quelle: eigener Screenshot, Hello-App, Fehlerbild 3 aus `variants/m04-l03-debugging`, 24.11.2026._
 

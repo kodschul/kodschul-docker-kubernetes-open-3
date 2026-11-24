@@ -99,7 +99,7 @@ flowchart LR
 
 `--rm` löscht den Testcontainer nach dem Befehl wieder. Er sieht genau das, was jeder andere Container im angegebenen Netzwerk sieht.
 
-<img src="../../assets/images/m04/compose-networks.png" alt="Terminal: docker network ls zeigt hello_backend-net und hello_frontend-net; in hello_frontend-net hängt nur hello-frontend-1, in hello_backend-net hello-frontend-1 und hello-backend-1; ein Testcontainer in hello_frontend-net meldet bad address backend, in hello_backend-net liefert er JSON" width="680">
+<img src="https://raw.githubusercontent.com/kodschul/kodschul-docker-kubernetes-open-3/a9dffe75259ca48c06f42220eaa7c5f31bd02c77/assets/images/m04/compose-networks.png" alt="Terminal: docker network ls zeigt hello_backend-net und hello_frontend-net; in hello_frontend-net hängt nur hello-frontend-1, in hello_backend-net hello-frontend-1 und hello-backend-1; ein Testcontainer in hello_frontend-net meldet bad address backend, in hello_backend-net liefert er JSON" width="680">
 
 _Quelle: eigener Screenshot, Hello-App mit compose.yml aus Lab 4.2, 24.11.2026._
 

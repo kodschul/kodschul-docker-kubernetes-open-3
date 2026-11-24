@@ -61,7 +61,7 @@ In der Shell ersetzt ein einziger Befehl die Startseite von nginx:
 echo '<h1>Hallo aus dem Container</h1>' > /usr/share/nginx/html/index.html
 ```
 
-<img src="../../assets/images/m01/nginx-exec-geaendert.png" alt="Browser zeigt statt der nginx-Startseite nur die Überschrift Hallo aus dem Container" width="520">
+<img src="https://raw.githubusercontent.com/kodschul/kodschul-docker-kubernetes-open-3/a9dffe75259ca48c06f42220eaa7c5f31bd02c77/assets/images/m01/nginx-exec-geaendert.png" alt="Browser zeigt statt der nginx-Startseite nur die Überschrift Hallo aus dem Container" width="520">
 
 _Quelle: eigener Screenshot, nginx:1.29-alpine nach `docker exec`, 24.11.2026._
 
@@ -129,7 +129,7 @@ flowchart LR
   C -- "Port 80 -> 8080" --> B["Browser<br/>localhost:8080"]
 ```
 
-<img src="../../assets/images/m01/bind-mount-seite.png" alt="Browser zeigt die Überschrift Seite vom eigenen Rechner, Version 2 aus dem eingebundenen Ordner" width="520">
+<img src="https://raw.githubusercontent.com/kodschul/kodschul-docker-kubernetes-open-3/a9dffe75259ca48c06f42220eaa7c5f31bd02c77/assets/images/m01/bind-mount-seite.png" alt="Browser zeigt die Überschrift Seite vom eigenen Rechner, Version 2 aus dem eingebundenen Ordner" width="520">
 
 _Quelle: eigener Screenshot, nginx:1.29-alpine mit Bind Mount, 24.11.2026._
 

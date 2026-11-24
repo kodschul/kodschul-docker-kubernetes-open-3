@@ -74,7 +74,7 @@ spec:
 
 Ein Job-Pod endet absichtlich: Status `Completed`. Deshalb ist `restartPolicy: Always` verboten. `Never` startet bei einem Fehler einen neuen Pod, `OnFailure` startet den Container im selben Pod neu; in beiden Fällen zählt `backoffLimit` die Versuche. Der Job und das Frontend hängen denselben RWO-Claim ein; das geht, weil beide Pods auf dem einen Node `docker-desktop` laufen (Lab 9.3).
 
-<img src="../../assets/images/m09/busybox-job-befehle.png" alt="Terminal: docker run mit busybox:1.37 zählt mit wc -l sechs Zeilen in /data/access.log; ein zweiter Lauf kopiert die Datei nach /data/backup/access-20261123-231108.log" width="640">
+<img src="https://raw.githubusercontent.com/kodschul/kodschul-docker-kubernetes-open-3/a9dffe75259ca48c06f42220eaa7c5f31bd02c77/assets/images/m09/busybox-job-befehle.png" alt="Terminal: docker run mit busybox:1.37 zählt mit wc -l sechs Zeilen in /data/access.log; ein zweiter Lauf kopiert die Datei nach /data/backup/access-20261123-231108.log" width="640">
 
 _Quelle: eigener Screenshot, die Befehle des Jobs und des CronJobs mit `docker run` und einem Docker-Volume ausgeführt, 24.11.2026._
 

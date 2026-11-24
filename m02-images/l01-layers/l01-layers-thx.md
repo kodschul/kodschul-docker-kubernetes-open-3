@@ -55,7 +55,7 @@ Die beiden Hello-Images aus Lab 2.2 bringen nur ihre eigenen Schichten mit; Alpi
 
 `docker history` zeigt die Bauschritte eines Images von oben (zuletzt) nach unten (Basis), eine Zeile je Schritt:
 
-<img src="../../assets/images/m02/docker-history-python.png" alt="Terminal: docker history python:3.14-alpine mit den Spalten IMAGE, CREATED, CREATED BY, SIZE und COMMENT; unten ADD alpine-minirootfs mit 9.31MB, in der Mitte RUN apk add mit 46.6MB, viele Schritte mit 0B" width="720">
+<img src="https://raw.githubusercontent.com/kodschul/kodschul-docker-kubernetes-open-3/a9dffe75259ca48c06f42220eaa7c5f31bd02c77/assets/images/m02/docker-history-python.png" alt="Terminal: docker history python:3.14-alpine mit den Spalten IMAGE, CREATED, CREATED BY, SIZE und COMMENT; unten ADD alpine-minirootfs mit 9.31MB, in der Mitte RUN apk add mit 46.6MB, viele Schritte mit 0B" width="720">
 
 _Quelle: eigener Screenshot, `docker history python:3.14-alpine`, 24.11.2026._
 
@@ -77,7 +77,7 @@ Beim Herunterladen gilt dasselbe Prinzip: `docker pull` meldet `Already exists` 
 
 ## Basisimages und ihre Größe
 
-<img src="../../assets/images/m02/docker-images-sizes.png" alt="Terminal: docker images mit alpine:3.22 (4,22 MB), python:3.14-alpine (18,9 MB) und ubuntu:24.04 (30,9 MB) in der Spalte CONTENT SIZE" width="720">
+<img src="https://raw.githubusercontent.com/kodschul/kodschul-docker-kubernetes-open-3/a9dffe75259ca48c06f42220eaa7c5f31bd02c77/assets/images/m02/docker-images-sizes.png" alt="Terminal: docker images mit alpine:3.22 (4,22 MB), python:3.14-alpine (18,9 MB) und ubuntu:24.04 (30,9 MB) in der Spalte CONTENT SIZE" width="720">
 
 _Quelle: eigener Screenshot, Docker Desktop auf macOS (`linux/arm64`), 24.11.2026._
 
